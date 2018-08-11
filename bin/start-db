@@ -1,0 +1,13 @@
+#!/bin/bash
+
+mkdir -p postgres
+
+docker run --rm \
+  --name migration-demo \
+  -e PGDATA=/pgdata \
+  -e POSTGRES_PASSWORD=password \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_DB=migration-demo \
+  -p 5432:5432 \
+  --mount type=bind,src=${PWD}/postgres,target=/pgdata \
+  postgres
