@@ -4,5 +4,3 @@
 
 # the executable we build
 /migration-demo
-
-bin/local_env.sh
