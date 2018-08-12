@@ -1,6 +1,6 @@
 .PHONY: all
 
-GO_FILES = $(shell find api cli db error config vendor -type f | sort)
+GO_FILES = $(shell find main.go api cli config db error handler vendor -type f | sort)
 
 all: migration-demo
 

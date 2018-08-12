@@ -2,7 +2,7 @@ package cli
 
 import (
 	"github.com/spf13/cobra"
-	"fmt"
+	"github.com/udacity/migration-demo/api"
 )
 
 var startCmd = &cobra.Command{
@@ -10,7 +10,6 @@ var startCmd = &cobra.Command{
 	Short: "run server",
 	Long: "Run the service and block",
 	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Usage()
-		fmt.Printf("Command `start` not yet implemented")
+		api.Serve(8080)
 	},
 }

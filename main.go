@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 
+	"github.com/udacity/migration-demo/cli"
 )
 
 func main() {
@@ -10,8 +11,9 @@ func main() {
 		os.Args = append(os.Args, "help")
 	}
 
-	//config := LoadConfig()
-	//fmt.Println(config)
+	//cfg, _ := config.LoadConfig()
+
+	cli.Run(os.Args[1:])
 
 	//connStr := fmt.Sprintf("user=%s password=%s sslmode=disable", config.Db.Username, config.Db.Password)
 	//db, err := sql.Open("postgres", connStr)

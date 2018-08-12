@@ -5,8 +5,8 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use: "leaderboard <command> [flags]",
-	Short: "Dev Leaderboard",
+	Use: "migration-demo <command> [flags]",
+	Short: "Migration Demo",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Usage()
 	},
@@ -20,6 +20,7 @@ func init() {
 }
 
 func Run(args []string) error {
+
 	rootCmd.SetArgs(args)
 	return rootCmd.Execute()
 }

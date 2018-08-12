@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  name = "github.com/ansel1/merry"
+  packages = ["."]
+  revision = "b4b394b1516b322c3a9b8f598d37e7500cff0a45"
+  version = "v1.1.0"
+
+[[projects]]
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
   revision = "346938d642f2ec3594ed81d874461961cd0faa76"
@@ -24,6 +30,16 @@
   packages = ["."]
   revision = "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
   version = "v1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/jamesbibby/swag"
+  packages = [
+    ".",
+    "endpoint",
+    "swagger"
+  ]
+  revision = "e5b16f4dcbbadfa9afe676d1abef6a1334b5022e"
 
 [[projects]]
   branch = "master"
@@ -83,6 +99,12 @@
   version = "v1.2.2"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/udacity/go-errors"
+  packages = ["."]
+  revision = "9f89204a7546d93f611117d6474c38b64ccbef8d"
+
+[[projects]]
   name = "gopkg.in/gorp.v1"
   packages = ["."]
   revision = "c87af80f3cc5036b55b83d77171e156791085e2e"
@@ -91,6 +113,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "59f12f81eb98bd487f1d10926c7492c8dfd8f032bcd706614e612e035efec750"
+  inputs-digest = "c6365919841ca1dffa6ce7ecbcd695c9f892c4ad73eca423aab881c9ee41a751"
   solver-name = "gps-cdcl"
   solver-version = 1
