@@ -1,10 +1,11 @@
-.PHONY: start_db build
+.PHONY: all
 
-build:
+GO_FILES = $(shell find api cli db error config vendor -type f | sort)
+
+all: migration-demo
+
+migration-demo: $(GO_FILES)
 	go build
 
-start_db:
-	bin/start-db
-
-test:
+test: build
 	go test -v ./...
