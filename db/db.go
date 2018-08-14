@@ -3,7 +3,6 @@ package db
 import (
 	_ "github.com/lib/pq"
 	"github.com/jmoiron/sqlx"
-	"github.com/udacity/migration-demo/error"
 	"github.com/udacity/migration-demo/db/dal"
 	"github.com/udacity/migration-demo/config"
 )
@@ -17,11 +16,11 @@ type dalImpl struct {
 	cfg *config.Config
 }
 
-func connect(driverName string, connectionString string) (*sqlx.DB, error.Error) {
+func connect(driverName string, connectionString string) (*sqlx.DB, error) {
 	return sqlx.Connect(driverName, connectionString)
 }
 
-func GetDAL(cfg *config.Config) (DAL, error.Error) {
+func GetDAL(cfg *config.Config) (DAL, error) {
 	db, err := connect(cfg.Db.DriverName(), cfg.Db.ConnectionString())
 	if err != nil {
 		return nil, err

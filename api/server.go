@@ -20,15 +20,15 @@ func Serve(port int) {
 func generateApiHandler(router *mux.Router) http.Handler {
 	var endpoints []*swagger.Endpoint
 
-	endpoints = append(endpoints, GetProductsEndpoint()...)
+	endpoints = append(endpoints, GetUsersEndpoints()...)
 
 	api := swag.New(
-		swag.Title("Order service"),
+		swag.Title("Q&A"),
 		swag.Endpoints(endpoints...),
-		swag.Description("A service for processing orders"),
+		swag.Description("A Q&A service"),
 		swag.BasePath("/api"),
 		swag.ContactEmail("dathan@uacity.com"),
-		swag.Tag("Name", "OrdersAPI"),
+		swag.Tag("Name", "QA Demo"),
 	)
 
 	api.Walk(func(path string, ep *swagger.Endpoint) {

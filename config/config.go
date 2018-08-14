@@ -2,7 +2,6 @@ package config
 
 import (
 	"github.com/kelseyhightower/envconfig"
-	"github.com/udacity/migration-demo/error"
 )
 
 /*
@@ -13,10 +12,10 @@ type Config struct {
 	Server ServerConfig
 }
 
-func LoadConfig() (*Config, error.Error) {
+func LoadConfig() (*Config, error) {
 	var dbConfig PostgresDbConfig
 	var serverConfig SimpleServerConfig
-	var err error.Error
+	var err error
 
 	err = envconfig.Process("MIGRATION_DEMO_DB", &dbConfig)
 	if err != nil {
