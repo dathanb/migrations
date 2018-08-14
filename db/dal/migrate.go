@@ -4,16 +4,17 @@ import (
 	migrate "github.com/rubenv/sql-migrate"
 	"github.com/jmoiron/sqlx"
 	"github.com/udacity/migration-demo/config"
-	"github.com/udacity/migration-demo/error"
+	"github.com/udacity/go-errors"
 	"fmt"
+	"github.com/ansel1/merry"
 )
 
 const migrationsTable = "migrations"
 
 type MigrationDAL interface {
-	MigrateUp() error.Error
-	MigrateDown() error.Error
-	GetDBVersion() (string, error.Error)
+	MigrateUp() error
+	MigrateDown() error
+	GetDBVersion() (string, error)
 }
 
 type MigrationDALImpl struct {
@@ -25,7 +26,7 @@ func NewMigrationDAL(db *sqlx.DB, cfg config.DbConfig) MigrationDAL {
 	return &MigrationDALImpl{db: db, cfg: cfg}
 }
 
-func (migrationDAL *MigrationDALImpl) MigrateUp() error.Error{
+func (migrationDAL *MigrationDALImpl) MigrateUp() error {
 	migrations := &migrate.FileMigrationSource{
 		Dir: "db/migrations",
 	}
@@ -33,7 +34,7 @@ func (migrationDAL *MigrationDALImpl) MigrateUp() error.Error{
 
 	count, err := migrate.ExecMax(migrationDAL.db.DB, migrationDAL.cfg.DriverName(), migrations, migrate.Up, 0)
 	if err != nil {
-		return error.WithMessage("Failed to migrate")
+		return errors.WithRootCause(merry.New("Failed to migrate"), err)
 	}
 
 	fmt.Printf("Migrated %d files\n", count)
@@ -41,7 +42,7 @@ func (migrationDAL *MigrationDALImpl) MigrateUp() error.Error{
 	return nil
 }
 
-func (migrationDAL *MigrationDALImpl) MigrateDown() error.Error {
+func (migrationDAL *MigrationDALImpl) MigrateDown() error {
 	migrations := &migrate.FileMigrationSource{
 		Dir: "db/migrations",
 	}
@@ -49,7 +50,7 @@ func (migrationDAL *MigrationDALImpl) MigrateDown() error.Error {
 
 	count, err := migrate.ExecMax(migrationDAL.db.DB, migrationDAL.cfg.DriverName(), migrations, migrate.Down, 1)
 	if err != nil {
-		return error.WithMessage("Failed to migrate")
+		return errors.WithRootCause(merry.New("Failed to migrate"), err)
 	}
 
 	fmt.Printf("Migrated %d files\n", count)
@@ -57,7 +58,7 @@ func (migrationDAL *MigrationDALImpl) MigrateDown() error.Error {
 	return nil
 }
 
-func (migrationDAL *MigrationDALImpl) GetDBVersion() (string, error.Error) {
+func (migrationDAL *MigrationDALImpl) GetDBVersion() (string, error) {
 	rows, err := migrationDAL.db.Query("select max(id) from migrations")
 	if err != nil {
 		return "", err
