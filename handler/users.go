@@ -5,7 +5,7 @@ import (
 	"github.com/udacity/go-errors"
 	"encoding/json"
 	"io/ioutil"
-	"github.com/udacity/migration-demo/db/dal"
+	"github.com/udacity/migration-demo/db"
 )
 
 type CreateUserRequest struct {
@@ -26,7 +26,7 @@ func RegisterUserEndpoint(request *http.Request, vars map[string]string) ([]byte
 	}
 
 	// TODO: insert into DB
-	dal.NewUsersDAL()
+	db.ApplicationDAL().Users().CreateUser(request.Context(), reqObject.Id, reqObject.DisplayName)
 
-	return nil, 0, errors.NotImplementedError
+	return []byte("OK"), 200, nil
 }

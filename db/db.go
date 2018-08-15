@@ -7,8 +7,11 @@ import (
 	"github.com/udacity/migration-demo/config"
 )
 
+var globalDal DAL
+
 type DAL interface {
-	GetMigrationDAL() dal.MigrationDAL
+	Migrations() dal.MigrationDAL
+	Users() dal.UsersDAL
 }
 
 type dalImpl struct {
@@ -20,16 +23,30 @@ func connect(driverName string, connectionString string) (*sqlx.DB, error) {
 	return sqlx.Connect(driverName, connectionString)
 }
 
-func GetDAL(cfg *config.Config) (DAL, error) {
-	db, err := connect(cfg.Db.DriverName(), cfg.Db.ConnectionString())
-	if err != nil {
-		return nil, err
-	}
-
-	return &dalImpl{db, cfg}, nil
+// Returns the process-global DAL instance
+func ApplicationDAL() DAL {
+	return globalDal
 }
 
-func (appDAL *dalImpl) GetMigrationDAL() dal.MigrationDAL {
+func (appDAL *dalImpl) Migrations() dal.MigrationDAL {
 	return dal.NewMigrationDAL(appDAL.db, appDAL.cfg.Db)
 }
 
+func (appDAL *dalImpl) Users() dal.UsersDAL {
+	return dal.NewUsersDAL(appDAL.db)
+}
+
+func InitDAL(cfg *config.Config) error {
+	db, err := connect(cfg.Db.DriverName(), cfg.Db.ConnectionString())
+	if err != nil {
+		return err
+	}
+
+	globalDal = &dalImpl{db, cfg}
+
+	return nil
+}
+
+func init() {
+	globalDal = nil
+}
