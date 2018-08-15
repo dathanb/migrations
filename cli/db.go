@@ -30,19 +30,20 @@ var dbMigrateCmd = &cobra.Command{
 			panic(err.Error())
 		}
 
-		dal, err := db.GetDAL(cfg)
-
+		err = db.InitDAL(cfg)
 		if err != nil {
 			panic(err.Error())
 		}
 
+		dal := db.ApplicationDAL()
+
 		if dbMigrateUp {
-			err = dal.GetMigrationDAL().MigrateUp()
+			err = dal.Migrations().MigrateUp()
 			if err != nil {
 				panic(err.Error())
 			}
 		} else if dbMigrateDown {
-			err = dal.GetMigrationDAL().MigrateDown()
+			err = dal.Migrations().MigrateDown()
 			if err != nil {
 				panic(err.Error())
 			}
@@ -63,12 +64,12 @@ var dbVersionCmd = &cobra.Command{
 			panic(err.Error())
 		}
 
-		dal, err := db.GetDAL(cfg)
+		err = db.InitDAL(cfg)
 		if err != nil {
 			panic(err.Error())
 		}
 
-		version, err := dal.GetMigrationDAL().GetDBVersion()
+		version, err := db.ApplicationDAL().Migrations().GetDBVersion()
 		if err != nil {
 			panic(err.Error())
 		}
