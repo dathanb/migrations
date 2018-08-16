@@ -4,3 +4,6 @@
 
 # the executable we build
 /migration-demo
+
+# Don't version control the large test data files, just because you shouldn't have to pull down many gigs of data to clone this repo
+/data/large
