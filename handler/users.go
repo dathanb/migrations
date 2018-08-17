@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"github.com/udacity/migration-demo/db"
+	"github.com/sirupsen/logrus"
 )
 
 type CreateUserRequest struct {
@@ -15,6 +16,7 @@ type CreateUserRequest struct {
 
 func RegisterUserEndpoint(request *http.Request, vars map[string]string) ([]byte, int, error) {
 	var reqObject CreateUserRequest
+	logrus.Debug("Handling create user request to %v", request.URL)
 
 	body, err := ioutil.ReadAll(request.Body)
 	if err != nil {

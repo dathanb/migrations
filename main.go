@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/udacity/migration-demo/cli"
 	"os"
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -10,16 +11,8 @@ func main() {
 		os.Args = append(os.Args, "help")
 	}
 
-	//cfg, _ := config.LoadConfig()
+	logrus.SetFormatter(&logrus.JSONFormatter{})
+	logrus.SetLevel(logrus.DebugLevel)
 
 	cli.Run(os.Args[1:])
-
-	//connStr := fmt.Sprintf("user=%s password=%s sslmode=disable", config.Db.Username, config.Db.Password)
-	//db, err := sql.Open("postgres", connStr)
-	//bailOnError(err)
-	//defer db.Close()
-
-	//ctx := context.Background()
-	//err = saveGithubData(ctx, config, db)
-
 }
