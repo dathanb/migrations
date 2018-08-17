@@ -5,6 +5,8 @@ import (
 	"github.com/udacity/migration-demo/db"
 	"github.com/udacity/migration-demo/config"
 	"fmt"
+	"github.com/udacity/go-errors"
+	"github.com/ansel1/merry"
 )
 
 var dbCmd = &cobra.Command{
@@ -27,12 +29,12 @@ var dbMigrateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		cfg, err := config.LoadConfig()
 		if err != nil {
-			panic(err.Error())
+			panic(errors.WithRootCause(merry.New("Failed to load config"), err))
 		}
 
 		err = db.InitDAL(cfg)
 		if err != nil {
-			panic(err.Error())
+			panic(errors.WithRootCause(merry.New("Failed to initialize data access layer"), err))
 		}
 
 		dal := db.ApplicationDAL()
@@ -40,12 +42,12 @@ var dbMigrateCmd = &cobra.Command{
 		if dbMigrateUp {
 			err = dal.Migrations().MigrateUp()
 			if err != nil {
-				panic(err.Error())
+				panic(errors.WithRootCause(merry.New("Failed to migrate"), err))
 			}
 		} else if dbMigrateDown {
 			err = dal.Migrations().MigrateDown()
 			if err != nil {
-				panic(err.Error())
+				panic(errors.WithRootCause(merry.New("Failed to migrate"), err))
 			}
 		} else {
 			fmt.Print("Must specify one of --up or --down")
@@ -61,12 +63,12 @@ var dbVersionCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args[] string) {
 		cfg, err := config.LoadConfig()
 		if err != nil {
-			panic(err.Error())
+			panic(errors.WithRootCause(merry.New("Failed to load config"), err))
 		}
 
 		err = db.InitDAL(cfg)
 		if err != nil {
-			panic(err.Error())
+			panic(errors.WithRootCause(merry.New("Failed to initialize data access layer"), err))
 		}
 
 		version, err := db.ApplicationDAL().Migrations().GetDBVersion()

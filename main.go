@@ -1,9 +1,8 @@
 package main
 
 import (
-	"os"
-
 	"github.com/udacity/migration-demo/cli"
+	"os"
 )
 
 func main() {

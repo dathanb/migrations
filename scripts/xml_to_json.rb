@@ -51,7 +51,11 @@ output = []
 nodes.each do |node|
   node_data = {}
   node.keys.each do |k|
-    node_data[underscore(k)] = node[k]
+    if k == "id"
+      node_data[underscore(k)] = node[k].to_i
+    else
+      node_data[underscore(k)] = node[k]
+    end
   end
   output << node_data
 end

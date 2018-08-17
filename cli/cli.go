@@ -16,11 +16,11 @@ func init() {
 	rootCmd.AddCommand(
 		startCmd,
 		dbCmd,
+		clientCmd,
 	)
 }
 
 func Run(args []string) error {
-
 	rootCmd.SetArgs(args)
 	return rootCmd.Execute()
 }
