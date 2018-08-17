@@ -6,7 +6,6 @@ import (
 	"context"
 	"github.com/udacity/go-errors"
 	"github.com/ansel1/merry"
-	"fmt"
 )
 
 type UsersDAL interface {
@@ -38,7 +37,6 @@ func (_dal *PostgresUsersDAL) CreateUser(ctx context.Context, id int, displayNam
 	})
 
 	if err != nil {
-		fmt.Printf("%s\n", err.Error())
 		return models.User{}, errors.WithRootCause(merry.New("failed to insert user"), err)
 	}
 

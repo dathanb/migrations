@@ -1,12 +1,12 @@
 package dal
 
 import (
-	migrate "github.com/rubenv/sql-migrate"
+	"github.com/rubenv/sql-migrate"
 	"github.com/jmoiron/sqlx"
 	"github.com/udacity/migration-demo/config"
 	"github.com/udacity/go-errors"
-	"fmt"
 	"github.com/ansel1/merry"
+	"github.com/sirupsen/logrus"
 )
 
 const migrationsTable = "migrations"
@@ -37,7 +37,7 @@ func (migrationDAL *MigrationDALImpl) MigrateUp() error {
 		return errors.WithRootCause(merry.New("Failed to migrate"), err)
 	}
 
-	fmt.Printf("Migrated %d files\n", count)
+	logrus.Info("Migrated %d files\n", count)
 
 	return nil
 }
@@ -53,7 +53,7 @@ func (migrationDAL *MigrationDALImpl) MigrateDown() error {
 		return errors.WithRootCause(merry.New("Failed to migrate"), err)
 	}
 
-	fmt.Printf("Migrated %d files\n", count)
+	logrus.Info("Migrated %d files\n", count)
 
 	return nil
 }
