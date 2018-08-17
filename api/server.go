@@ -7,6 +7,8 @@ import (
 	"github.com/jamesbibby/swag/swagger"
 	"github.com/jamesbibby/swag"
 	log "github.com/sirupsen/logrus"
+	"net/http/httptest"
+	"net/url"
 )
 
 
@@ -19,12 +21,12 @@ func Serve(port int) {
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), router))
 }
 
-func generateApiHandler(router *mux.Router) http.Handler {
+func SwaggerApi() *swagger.API {
 	var endpoints []*swagger.Endpoint
 
 	endpoints = append(endpoints, GetUsersEndpoints()...)
 
-	api := swag.New(
+	return swag.New(
 		swag.Title("Q&A"),
 		swag.Endpoints(endpoints...),
 		swag.Description("A Q&A service"),
@@ -32,6 +34,29 @@ func generateApiHandler(router *mux.Router) http.Handler {
 		swag.ContactEmail("dathan@uacity.com"),
 		swag.Tag("Name", "QA Demo"),
 	)
+}
+
+func SwaggerDefinition(api *swagger.API) (string, error) {
+	handler := api.Handler(true)
+	swaggerUrl := url.URL{
+		Host:"localhost",
+		Path:"/",
+		Scheme:"http",
+	}
+
+	request := http.Request{
+		Method:"GET",
+		URL: &swaggerUrl,
+		Host:"localhost",
+	}
+	responseWriter := httptest.NewRecorder()
+	handler(responseWriter, &request)
+
+	return responseWriter.Body.String(), nil
+}
+
+func generateApiHandler(router *mux.Router) http.Handler {
+	api := SwaggerApi()
 
 	api.Walk(func(path string, ep *swagger.Endpoint) {
 		h := ep.Handler.(http.HandlerFunc)

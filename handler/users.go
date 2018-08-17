@@ -26,7 +26,15 @@ func RegisterUserEndpoint(request *http.Request, vars map[string]string) ([]byte
 	}
 
 	// TODO: insert into DB
-	db.ApplicationDAL().Users().CreateUser(request.Context(), reqObject.Id, reqObject.DisplayName)
+	user, err := db.ApplicationDAL().Users().CreateUser(request.Context(), reqObject.Id, reqObject.DisplayName)
+	if err != nil {
+		return nil, 0, errors.WithRootCause(errors.SQLCommitError, err)
+	}
 
-	return []byte("OK"), 200, nil
+	data, err := json.Marshal(user)
+	if err != nil {
+		return nil, 0, errors.WithRootCause(errors.JSONMarshalingError, err)
+	}
+
+	return data, 200, nil
 }
