@@ -12,6 +12,7 @@ var globalDal DAL
 type DAL interface {
 	Migrations() dal.MigrationDAL
 	Users() dal.UsersDAL
+	Posts() dal.PostsDAL
 }
 
 type dalImpl struct {
@@ -34,6 +35,10 @@ func (appDAL *dalImpl) Migrations() dal.MigrationDAL {
 
 func (appDAL *dalImpl) Users() dal.UsersDAL {
 	return dal.NewUsersDAL(appDAL.db)
+}
+
+func (appDAL *dalImpl) Posts() dal.PostsDAL {
+	return dal.NewPostsDAL(appDAL.db)
 }
 
 func InitDAL(cfg *config.Config) error {

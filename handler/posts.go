@@ -9,30 +9,34 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type CreateUserRequest struct {
-	Id int `json:"id"`
-	DisplayName string `json:"display_name"`
+type CreatePostRequest struct {
+	Id       int    `json:"id"`
+	PostType int    `json:"post_type_id"`
+	UserId   int    `json:"user_id"`
+	Body     string `json:"body"`
 }
 
-func RegisterUserEndpoint(request *http.Request, vars map[string]string) ([]byte, int, error) {
-	var reqObject CreateUserRequest
-	logrus.Debug("Handling create user request to %v", request.URL)
+func CreatePostEndpoint(request *http.Request, vars map[string]string) ([]byte, int, error) {
+	var reqObject CreatePostRequest
+	logrus.Debug("Handling create post request to %v", request.URL)
 
 	body, err := ioutil.ReadAll(request.Body)
 	if err != nil {
 		return nil, 0, errors.WithRootCause(errors.HTTPError, err)
 	}
+
 	err = json.Unmarshal(body, &reqObject)
 	if err != nil {
 		return nil, 0, errors.WithRootCause(errors.HTTPBadRequestError, err)
 	}
 
-	user, err := db.ApplicationDAL().Users().UpsertUser(request.Context(), reqObject.Id, reqObject.DisplayName)
+	post, err := db.ApplicationDAL().Posts().UpsertPost(request.Context(), reqObject.Id, reqObject.PostType,
+		reqObject.UserId, reqObject.Body)
 	if err != nil {
 		return nil, 0, errors.WithRootCause(errors.SQLCommitError, err)
 	}
 
-	data, err := json.Marshal(user)
+	data, err := json.Marshal(post)
 	if err != nil {
 		return nil, 0, errors.WithRootCause(errors.JSONMarshalingError, err)
 	}

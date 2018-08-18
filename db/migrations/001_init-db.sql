@@ -8,7 +8,6 @@ create table users (
 create table posts (
   id integer primary key,
   post_type integer not null,
-  post_type_id integer not null,
   body text not null,
   user_id integer not null references users(id)
 );

@@ -45,7 +45,10 @@ var clientCmd = &cobra.Command{
 		}
 
 		users := make(chan models.User)
+		posts := make(chan models.Post)
 		go readUsers(file, users)
+		go readPosts(file, posts)
+
 		// TODO: put this loop in a func and spawn several parallel goroutines to run them
 		for user := range users {
 			userBytes, err := json.Marshal(user)
@@ -98,4 +101,25 @@ func readUsers(file *os.File, users chan <- models.User) {
 		users <- user
 	}
 	close(users)
+}
+
+func readPosts(file *os.File, posts chan <- models.Post) {
+	dec := json.NewDecoder(file)
+
+	// read array open bracket
+	_, err := dec.Token()
+	if err != nil {
+		panic(errors.WithRootCause(merry.New("Expected start of array"), err))
+	}
+
+	for dec.More() {
+		var post models.Post
+		err := dec.Decode(&post)
+		if err != nil {
+			panic(errors.WithRootCause(merry.New("Failed to unmarshal Post from input"), err))
+		}
+
+		posts <- post
+	}
+	close(posts)
 }
