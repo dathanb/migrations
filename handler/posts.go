@@ -24,12 +24,12 @@ func CreatePostEndpoint(request *http.Request, vars map[string]string) ([]byte, 
 	if err != nil {
 		return nil, 0, errors.WithRootCause(errors.HTTPError, err)
 	}
+
 	err = json.Unmarshal(body, &reqObject)
 	if err != nil {
 		return nil, 0, errors.WithRootCause(errors.HTTPBadRequestError, err)
 	}
 
-	// TODO: insert into DB
 	post, err := db.ApplicationDAL().Posts().UpsertPost(request.Context(), reqObject.Id, reqObject.PostType,
 		reqObject.UserId, reqObject.Body)
 	if err != nil {

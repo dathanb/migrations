@@ -25,6 +25,7 @@ func SwaggerApi() *swagger.API {
 	var endpoints []*swagger.Endpoint
 
 	endpoints = append(endpoints, GetUsersEndpoints()...)
+	endpoints = append(endpoints, GetPostsEndpoints()...)
 
 	return swag.New(
 		swag.Title("Q&A"),
