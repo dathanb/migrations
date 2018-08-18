@@ -24,7 +24,7 @@ type PostgresPostsDAL struct {
 
 func (_dal *PostgresPostsDAL) UpsertPost(ctx context.Context, id int, postType int, userId int, body string) (models.Post, error) {
 	var err error
-	tx, err := _dal.db.Begin()
+	tx, err := _dal.db.Beginx()
 	if err != nil {
 		return models.Post{}, errors.WithRootCause(merry.New("failed to begin transaction"), err)
 	}
@@ -38,15 +38,14 @@ func (_dal *PostgresPostsDAL) UpsertPost(ctx context.Context, id int, postType i
 
 	defer rows.Close()
 	if rows.Next() {
-		_, err = _dal.db.NamedExec(`update posts set post_type = :post_type, user_id = :user_id, 
-body = :body where id = :id`, map[string]interface{}{
+		_, err = _dal.db.NamedExec(`update posts set post_type = :post_type, user_id = :user_id, body = :body where id = :id`, map[string]interface{}{
 			"id":           id,
 			"post_type":    postType,
 			"user_id":      userId,
 			"body":         body,
 		})
 	} else {
-		_, err = _dal.db.NamedExec(`insert into users(id, post_type, user_id, body) 
+		_, err = _dal.db.NamedExec(`insert into posts(id, post_type, user_id, body) 
 values (:id, :post_type, :user_id, :body)`, map[string]interface{}{
 			"id":           id,
 			"post_type":    postType,
