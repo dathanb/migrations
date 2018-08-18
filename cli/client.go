@@ -11,6 +11,8 @@ import (
 	"github.com/udacity/migration-demo/config"
 	"net/http"
 	"bytes"
+	"github.com/sirupsen/logrus"
+	"io/ioutil"
 )
 
 var dirName string
@@ -51,10 +53,19 @@ var clientCmd = &cobra.Command{
 				panic(errors.WithRootCause(merry.New("Failed to marshal user to JSON"), err))
 			}
 
-			response, err := http.Post("http://localhost:8080/api/v1/users", "application/json", bytes.NewReader(userBytes))
+			logrus.Debugf("Sending user with id %d", user.Id)
+			request, err := http.NewRequest("PUT", "http://localhost:8080/api/v1/users", bytes.NewReader(userBytes))
+			if err != nil {
+				panic(errors.WithRootCause(merry.New("Failed to prepare request"), err))
+			}
+
+			response, err := http.DefaultClient.Do(request)
 			if err != nil {
 				panic(errors.WithRootCause(merry.New("Failed to send User to service"), err))
 			}
+
+			responseBody, err := ioutil.ReadAll(response.Body)
+			logrus.Debugf("Response %d: %v", response.StatusCode, string(responseBody))
 
 			err = response.Body.Close()
 			if err != nil {
