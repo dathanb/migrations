@@ -9,7 +9,7 @@ import (
 
 func GetUsersEndpoints() []*swagger.Endpoint {
 	return []*swagger.Endpoint{
-		endpoint.New("post", "/users", "Register user",
+		endpoint.New("put", "/users", "Register user",
 			endpoint.Handler(utils.WrapHandler(handler.RegisterUserEndpoint)),
 		),
 	}

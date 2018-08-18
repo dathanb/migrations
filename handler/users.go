@@ -28,7 +28,7 @@ func RegisterUserEndpoint(request *http.Request, vars map[string]string) ([]byte
 	}
 
 	// TODO: insert into DB
-	user, err := db.ApplicationDAL().Users().CreateUser(request.Context(), reqObject.Id, reqObject.DisplayName)
+	user, err := db.ApplicationDAL().Users().UpsertUser(request.Context(), reqObject.Id, reqObject.DisplayName)
 	if err != nil {
 		return nil, 0, errors.WithRootCause(errors.SQLCommitError, err)
 	}
