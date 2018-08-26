@@ -7,9 +7,7 @@ import (
 
 const TimeFormat ="2006-01-02T15:04:05"
 
-type Time struct {
-	time.Time
-}
+type Time time.Time
 
 func (t *Time) UnmarshalJSON(buf []byte) error {
 	var timeString string
@@ -19,7 +17,7 @@ func (t *Time) UnmarshalJSON(buf []byte) error {
 	tt, err := time.Parse(TimeFormat, timeString)
 	if err != nil { return err }
 
-	t.Time = tt
+	*t = Time(tt)
 	return nil
 }
 

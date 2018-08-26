@@ -14,7 +14,7 @@ func TestTime_UnmarshalJSON(t *testing.T) {
 
 		err := json.Unmarshal([]byte(datetime), &parsedTime)
 		assert.NoError(t, err)
-		assert.Equal(t, time.Date(2013, 12, 18, 19, 59, 50, 907000000, time.UTC), parsedTime.Time)
+		assert.Equal(t, time.Date(2013, 12, 18, 19, 59, 50, 907000000, time.UTC), time.Time(parsedTime))
 	})
 }
 
