@@ -13,9 +13,16 @@ import (
 	"bytes"
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
+	"fmt"
 )
 
 var dirName string
+
+type RequestDescriptor struct {
+	Type string
+	Data interface{}
+}
+
 
 var clientCmd = &cobra.Command{
 	Use: "client",
@@ -50,14 +57,14 @@ var clientCmd = &cobra.Command{
 		go readPosts(file, posts)
 
 		// TODO: put this loop in a func and spawn several parallel goroutines to run them
-		for user := range users {
-			userBytes, err := json.Marshal(user)
+		for reqDescriptor := range sortInputs(users, posts) {
+			userBytes, err := json.Marshal(reqDescriptor.Data)
 			if err != nil {
 				panic(errors.WithRootCause(merry.New("Failed to marshal user to JSON"), err))
 			}
 
-			logrus.Debugf("Sending user with id %d", user.Id)
-			request, err := http.NewRequest("PUT", "http://localhost:8080/api/v1/users", bytes.NewReader(userBytes))
+			logrus.Debugf("Sending %s with body %+v", reqDescriptor.Type, reqDescriptor.Data)
+			request, err := http.NewRequest("PUT", fmt.Sprintf("http://localhost:8080/api/v1/%v", reqDescriptor.Type), bytes.NewReader(userBytes))
 			if err != nil {
 				panic(errors.WithRootCause(merry.New("Failed to prepare request"), err))
 			}
@@ -104,22 +111,51 @@ func readUsers(file *os.File, users chan <- models.User) {
 }
 
 func readPosts(file *os.File, posts chan <- models.Post) {
-	dec := json.NewDecoder(file)
+	//dec := json.NewDecoder(file)
+	//
+	//// read array open bracket
+	//_, err := dec.Token()
+	//if err != nil {
+	//	panic(errors.WithRootCause(merry.New("Expected start of array"), err))
+	//}
+	//
+	//for dec.More() {
+	//	var post models.Post
+	//	err := dec.Decode(&post)
+	//	if err != nil {
+	//		panic(errors.WithRootCause(merry.New("Failed to unmarshal Post from input"), err))
+	//	}
+	//
+	//	posts <- post
+	//}
+	//close(posts)
+}
 
-	// read array open bracket
-	_, err := dec.Token()
-	if err != nil {
-		panic(errors.WithRootCause(merry.New("Expected start of array"), err))
-	}
+func sortInputs(users chan models.User, posts chan models.Post) chan RequestDescriptor {
+	outputChannel := make(chan RequestDescriptor)
 
-	for dec.More() {
-		var post models.Post
-		err := dec.Decode(&post)
-		if err != nil {
-			panic(errors.WithRootCause(merry.New("Failed to unmarshal Post from input"), err))
+	go func() {
+		var user models.User
+		var usersOk bool
+
+		select {
+		case user, usersOk = <-users:
+		default:
 		}
 
-		posts <- post
-	}
-	close(posts)
+		for usersOk {
+			outputChannel <- RequestDescriptor{
+				Type: "users",
+				Data: user,
+			}
+
+			select {
+			case user, usersOk = <-users:
+			default:
+			}
+		}
+	}()
+
+	return outputChannel
 }
+
