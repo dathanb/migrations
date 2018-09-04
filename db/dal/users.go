@@ -1,11 +1,12 @@
 package dal
 
 import (
-	"github.com/udacity/migration-demo/models"
-	"github.com/jmoiron/sqlx"
 	"context"
-	"github.com/udacity/go-errors"
 	"github.com/ansel1/merry"
+	"github.com/jmoiron/sqlx"
+	log "github.com/sirupsen/logrus"
+	"github.com/udacity/go-errors"
+	"github.com/udacity/migration-demo/models"
 )
 
 type UsersDAL interface {
@@ -26,28 +27,21 @@ func (_dal *PostgresUsersDAL) UpsertUser(ctx context.Context, id int, displayNam
 	var err error
 	tx, err := _dal.db.Begin()
 	if err != nil {
+		if log.GetLevel() >= log.ErrorLevel {
+			log.Errorf("Could not begin transaction to upsert user %d", id)
+		}
 		return models.User{}, errors.WithRootCause(merry.New("failed to begin transaction"), err)
 	}
 
 	defer tx.Rollback()
 
-	rows, err := _dal.db.QueryContext(ctx, "select 1 from users where id = $1", id)
-	if err != nil {
-		return models.User{}, errors.WithRootCause(errors.SQLSelectError, err)
+	if log.GetLevel() >= log.DebugLevel {
+		log.WithField("id", id).WithField("displayName", displayName).Debug("Inserting user")
 	}
-
-	defer rows.Close()
-	if rows.Next() {
-		_, err = _dal.db.NamedExec("update users set display_name = :display_name where id = :id", map[string]interface{}{
-			"id":           id,
-			"display_name": displayName,
-		})
-	} else {
-		_, err = _dal.db.NamedExec("insert into users(id, display_name) values (:id, :display_name)", map[string]interface{}{
-			"id":           id,
-			"display_name": displayName,
-		})
-	}
+	_, err = _dal.db.NamedExec("insert into users(id, display_name) values (:id, :display_name) on conflict (id) do update set display_name = EXCLUDED.display_name", map[string]interface{}{
+		"id":           id,
+		"display_name": displayName,
+	})
 
 	if err != nil {
 		return models.User{}, errors.WithRootCause(merry.New("failed to insert user"), err)
