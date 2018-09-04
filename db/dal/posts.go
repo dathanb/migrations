@@ -1,11 +1,12 @@
 package dal
 
 import (
-	"github.com/udacity/migration-demo/models"
-	"github.com/jmoiron/sqlx"
 	"context"
-	"github.com/udacity/go-errors"
 	"github.com/ansel1/merry"
+	"github.com/jmoiron/sqlx"
+	log "github.com/sirupsen/logrus"
+	"github.com/udacity/go-errors"
+	"github.com/udacity/migration-demo/models"
 )
 
 type PostsDAL interface {
@@ -26,35 +27,35 @@ func (_dal *PostgresPostsDAL) UpsertPost(ctx context.Context, id int, postType i
 	var err error
 	tx, err := _dal.db.Beginx()
 	if err != nil {
-		return models.Post{}, errors.WithRootCause(merry.New("failed to begin transaction"), err)
+		if log.GetLevel() >= log.ErrorLevel {
+			log.Errorf("Could not begin transaction to upsert post with id %d", id)
+		}
+		return models.Post{}, errors.WithRootCause(merry.New("Failed to begin transaction"), err)
 	}
 
 	defer tx.Rollback()
 
-	rows, err := _dal.db.QueryContext(ctx, "select 1 from posts where id = $1", id)
-	if err != nil {
-		return models.Post{}, errors.WithRootCause(errors.SQLSelectError, err)
+	if log.GetLevel() >= log.DebugLevel {
+		log.WithField("id", id).WithField("post_type", postType).
+			WithField("user_id", userId).WithField("body", body).
+			Debug("Inserting user")
 	}
-
-	defer rows.Close()
-	if rows.Next() {
-		_, err = _dal.db.NamedExec(`update posts set post_type = :post_type, user_id = :user_id, body = :body where id = :id`, map[string]interface{}{
-			"id":           id,
-			"post_type":    postType,
-			"user_id":      userId,
-			"body":         body,
-		})
-	} else {
-		_, err = _dal.db.NamedExec(`insert into posts(id, post_type, user_id, body) 
-values (:id, :post_type, :user_id, :body)`, map[string]interface{}{
-			"id":           id,
-			"post_type":    postType,
-			"user_id":      userId,
-			"body":         body,
-		})
-	}
+	_, err = _dal.db.NamedExec(`insert into posts(id, post_type, user_id, body) 
+values (:id, :post_type, :user_id, :body)
+on conflict (id) do update set
+post_type = EXCLUDED.post_type,
+user_id = EXCLUDED.user_id,
+body = EXCLUDED.body`, map[string]interface{}{
+		"id":           id,
+		"post_type":    postType,
+		"user_id":      userId,
+		"body":         body,
+	})
 
 	if err != nil {
+		if log.GetLevel() >= log.ErrorLevel {
+			log.Errorf("Got error while upserting post with id %d: %s", id, err.Error())
+		}
 		return models.Post{}, errors.WithRootCause(merry.New("failed to insert post"), err)
 	}
 
