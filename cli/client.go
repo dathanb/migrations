@@ -1,19 +1,20 @@
 package cli
 
 import (
-	"github.com/spf13/cobra"
-	"os"
-	"github.com/udacity/go-errors"
-	"github.com/ansel1/merry"
-	"encoding/json"
-	"github.com/udacity/migration-demo/models"
-	"path"
-	"github.com/udacity/migration-demo/config"
-	"net/http"
 	"bytes"
-	"github.com/sirupsen/logrus"
-	"io/ioutil"
+	"encoding/json"
 	"fmt"
+	"github.com/ansel1/merry"
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/cobra"
+	"github.com/udacity/go-errors"
+	"github.com/udacity/migration-demo/config"
+	"github.com/udacity/migration-demo/models"
+	"io/ioutil"
+	"net/http"
+	"os"
+	"path"
+	"time"
 )
 
 var dirName string
@@ -46,15 +47,19 @@ var clientCmd = &cobra.Command{
 		}
 
 		// open a file
-		file, err := os.Open(path.Join(dirName, "users.json"))
+		usersFile, err := os.Open(path.Join(dirName, "users.json"))
 		if err != nil {
-			panic(errors.WithRootCause(merry.New("Failed to open input file"), err))
+			panic(errors.WithRootCause(merry.New("Failed to open input file for users"), err))
+		}
+		postsFile, err := os.Open(path.Join(dirName, "posts.json"))
+		if err != nil {
+			panic(errors.WithRootCause(merry.New("Failed to open input file for posts"), err))
 		}
 
 		users := make(chan models.User)
 		posts := make(chan models.Post)
-		go readUsers(file, users)
-		go readPosts(file, posts)
+		go readUsers(usersFile, users)
+		go readPosts(postsFile, posts)
 
 		// TODO: put this loop in a func and spawn several parallel goroutines to run them
 		for reqDescriptor := range sortInputs(users, posts) {
@@ -111,42 +116,77 @@ func readUsers(file *os.File, users chan <- models.User) {
 }
 
 func readPosts(file *os.File, posts chan <- models.Post) {
-	//dec := json.NewDecoder(file)
-	//
-	//// read array open bracket
-	//_, err := dec.Token()
-	//if err != nil {
-	//	panic(errors.WithRootCause(merry.New("Expected start of array"), err))
-	//}
-	//
-	//for dec.More() {
-	//	var post models.Post
-	//	err := dec.Decode(&post)
-	//	if err != nil {
-	//		panic(errors.WithRootCause(merry.New("Failed to unmarshal Post from input"), err))
-	//	}
-	//
-	//	posts <- post
-	//}
-	//close(posts)
+	dec := json.NewDecoder(file)
+
+	// read array open bracket
+	_, err := dec.Token()
+	if err != nil {
+		panic(errors.WithRootCause(merry.New("Expected start of array"), err))
+	}
+
+	for dec.More() {
+		var post models.Post
+		err := dec.Decode(&post)
+		if err != nil {
+			panic(errors.WithRootCause(merry.New("Failed to unmarshal Post from input"), err))
+		}
+
+		posts <- post
+	}
+	close(posts)
 }
 
-func sortInputs(users chan models.User, _ chan models.Post) chan RequestDescriptor {
+func sortInputs(users chan models.User, posts chan models.Post) chan RequestDescriptor {
 	outputChannel := make(chan RequestDescriptor)
 
 	go func() {
 		var user models.User
+		var post models.Post
 		var usersOk bool
+		var postsOk bool
 
 		user, usersOk = <-users
+		post, postsOk = <-posts
 
-		for usersOk {
-			outputChannel <- RequestDescriptor{
-				Type: "users",
-				Data: user,
+		for usersOk || postsOk {
+			if usersOk && postsOk {
+				if time.Time(user.CreationDate).Before(time.Time(post.CreationDate))  {
+					outputChannel <- RequestDescriptor{
+						Type: "users",
+						Data: user,
+					}
+
+					user, usersOk = <-users
+				} else if time.Time(post.CreationDate).Before(time.Time(user.CreationDate)) {
+					outputChannel <- RequestDescriptor{
+						Type: "posts",
+						Data: post,
+					}
+
+					post, postsOk = <-posts
+				} else if time.Time(user.CreationDate).Equal(time.Time(post.CreationDate)) {
+					outputChannel <- RequestDescriptor{
+						Type: "users",
+						Data: user,
+					}
+
+					user, usersOk = <-users
+				}
+			} else if usersOk {
+				outputChannel <- RequestDescriptor{
+					Type: "users",
+					Data: user,
+				}
+
+				user, usersOk = <-users
+			} else if postsOk {
+				outputChannel <- RequestDescriptor{
+					Type: "posts",
+					Data: post,
+				}
+
+				post, postsOk = <-posts
 			}
-
-			user, usersOk = <-users
 		}
 
 		close(outputChannel)

@@ -2,1103 +2,778 @@
   {
     "id": 1,
     "tag_name": "kindle",
-    "count": "309",
-    "excerpt_post_id": "29",
-    "wiki_post_id": "28"
+    "count": 309,
+    "excerpt_post_id": 29,
+    "wiki_post_id": 28
   },
   {
     "id": 2,
     "tag_name": "time-to-read",
-    "count": "5",
-    "excerpt_post_id": "688",
-    "wiki_post_id": "687"
+    "count": 5,
+    "excerpt_post_id": 688,
+    "wiki_post_id": 687
   },
   {
     "id": 3,
     "tag_name": "kindle-touch",
-    "count": "7",
-    "excerpt_post_id": "824",
-    "wiki_post_id": "823"
+    "count": 7,
+    "excerpt_post_id": 824,
+    "wiki_post_id": 823
   },
   {
     "id": 4,
     "tag_name": "mobi",
-    "count": "67",
-    "excerpt_post_id": "394",
-    "wiki_post_id": "393"
+    "count": 67,
+    "excerpt_post_id": 394,
+    "wiki_post_id": 393
   },
   {
     "id": 5,
     "tag_name": "html",
-    "count": "45",
-    "excerpt_post_id": "227",
-    "wiki_post_id": "226"
+    "count": 45,
+    "excerpt_post_id": 227,
+    "wiki_post_id": 226
   },
   {
     "id": 6,
     "tag_name": "conversion",
-    "count": "77",
-    "excerpt_post_id": "76",
-    "wiki_post_id": "75"
+    "count": 77,
+    "excerpt_post_id": 76,
+    "wiki_post_id": 75
   },
   {
     "id": 7,
     "tag_name": "nook",
-    "count": "28",
-    "excerpt_post_id": "120",
-    "wiki_post_id": "119"
+    "count": 28,
+    "excerpt_post_id": 120,
+    "wiki_post_id": 119
   },
   {
     "id": 8,
     "tag_name": "pdf",
-    "count": "106",
-    "excerpt_post_id": "178",
-    "wiki_post_id": "177"
+    "count": 106,
+    "excerpt_post_id": 178,
+    "wiki_post_id": 177
   },
   {
     "id": 9,
     "tag_name": "epub",
-    "count": "293",
-    "excerpt_post_id": "118",
-    "wiki_post_id": "117"
+    "count": 293,
+    "excerpt_post_id": 118,
+    "wiki_post_id": 117
   },
   {
     "id": 10,
     "tag_name": "touchscreen",
-    "count": "3",
-    "excerpt_post_id": "834",
-    "wiki_post_id": "833"
+    "count": 3,
+    "excerpt_post_id": 834,
+    "wiki_post_id": 833
   },
   {
     "id": 13,
     "tag_name": "fonts",
-    "count": "38",
-    "excerpt_post_id": "240",
-    "wiki_post_id": "239"
+    "count": 38,
+    "excerpt_post_id": 240,
+    "wiki_post_id": 239
   },
   {
     "id": 14,
     "tag_name": "nook-simple-touch",
-    "count": "8",
-    "excerpt_post_id": "27",
-    "wiki_post_id": "26"
+    "count": 8,
+    "excerpt_post_id": 27,
+    "wiki_post_id": 26
   },
   {
     "id": 15,
     "tag_name": "hardware",
-    "count": "17",
-    "excerpt_post_id": "78",
-    "wiki_post_id": "77"
+    "count": 17,
+    "excerpt_post_id": 78,
+    "wiki_post_id": 77
   },
   {
     "id": 16,
     "tag_name": "ebook-readers",
-    "count": "118",
-    "excerpt_post_id": "330",
-    "wiki_post_id": "329"
-  },
-  {
-    "id": 17,
-    "tag_name": "buttons",
-    "count": "4"
+    "count": 118,
+    "excerpt_post_id": 330,
+    "wiki_post_id": 329
   },
   {
     "id": 20,
     "tag_name": "calibre",
-    "count": "99",
-    "excerpt_post_id": "40",
-    "wiki_post_id": "39"
+    "count": 99,
+    "excerpt_post_id": 40,
+    "wiki_post_id": 39
   },
   {
     "id": 24,
     "tag_name": "send-to-kindle",
-    "count": "21",
-    "excerpt_post_id": "48",
-    "wiki_post_id": "47"
+    "count": 21,
+    "excerpt_post_id": 48,
+    "wiki_post_id": 47
   },
   {
     "id": 25,
     "tag_name": "3g",
-    "count": "5",
-    "excerpt_post_id": "802",
-    "wiki_post_id": "801"
+    "count": 5,
+    "excerpt_post_id": 802,
+    "wiki_post_id": 801
   },
   {
     "id": 26,
     "tag_name": "wifi",
-    "count": "6",
-    "excerpt_post_id": "364",
-    "wiki_post_id": "363"
+    "count": 6,
+    "excerpt_post_id": 364,
+    "wiki_post_id": 363
   },
   {
     "id": 27,
     "tag_name": "kindle-fire",
-    "count": "17",
-    "excerpt_post_id": "671",
-    "wiki_post_id": "670"
+    "count": 17,
+    "excerpt_post_id": 671,
+    "wiki_post_id": 670
   },
   {
     "id": 28,
     "tag_name": "sideloading",
-    "count": "8",
-    "excerpt_post_id": "6569",
-    "wiki_post_id": "6568"
-  },
-  {
-    "id": 30,
-    "tag_name": "software",
-    "count": "20"
-  },
-  {
-    "id": 31,
-    "tag_name": "screens",
-    "count": "5"
-  },
-  {
-    "id": 32,
-    "tag_name": "color",
-    "count": "5"
+    "count": 8,
+    "excerpt_post_id": 6569,
+    "wiki_post_id": 6568
   },
   {
     "id": 33,
     "tag_name": "e-ink",
-    "count": "22",
-    "excerpt_post_id": "180",
-    "wiki_post_id": "179"
+    "count": 22,
+    "excerpt_post_id": 180,
+    "wiki_post_id": 179
   },
   {
     "id": 34,
     "tag_name": "amazon",
-    "count": "77",
-    "excerpt_post_id": "392",
-    "wiki_post_id": "391"
-  },
-  {
-    "id": 35,
-    "tag_name": "writing",
-    "count": "4"
+    "count": 77,
+    "excerpt_post_id": 392,
+    "wiki_post_id": 391
   },
   {
     "id": 36,
     "tag_name": "markdown",
-    "count": "6",
-    "excerpt_post_id": "86",
-    "wiki_post_id": "85"
-  },
-  {
-    "id": 37,
-    "tag_name": "source",
-    "count": "7"
+    "count": 6,
+    "excerpt_post_id": 86,
+    "wiki_post_id": 85
   },
   {
     "id": 39,
     "tag_name": "windows",
-    "count": "19",
-    "excerpt_post_id": "420",
-    "wiki_post_id": "419"
+    "count": 19,
+    "excerpt_post_id": 420,
+    "wiki_post_id": 419
   },
   {
     "id": 40,
     "tag_name": "kdp",
-    "count": "6",
-    "excerpt_post_id": "403",
-    "wiki_post_id": "402"
+    "count": 6,
+    "excerpt_post_id": 403,
+    "wiki_post_id": 402
   },
   {
     "id": 41,
     "tag_name": "publishing",
-    "count": "52",
-    "excerpt_post_id": "657",
-    "wiki_post_id": "656"
+    "count": 52,
+    "excerpt_post_id": 657,
+    "wiki_post_id": 656
   },
   {
     "id": 42,
     "tag_name": "pricing",
-    "count": "7",
-    "excerpt_post_id": "6560",
-    "wiki_post_id": "6559"
+    "count": 7,
+    "excerpt_post_id": 6560,
+    "wiki_post_id": 6559
   },
   {
     "id": 44,
     "tag_name": "document",
-    "count": "4",
-    "excerpt_post_id": "222",
-    "wiki_post_id": "221"
-  },
-  {
-    "id": 45,
-    "tag_name": "production",
-    "count": "8"
+    "count": 4,
+    "excerpt_post_id": 222,
+    "wiki_post_id": 221
   },
   {
     "id": 46,
     "tag_name": "file-format",
-    "count": "45",
-    "excerpt_post_id": "327",
-    "wiki_post_id": "326"
-  },
-  {
-    "id": 47,
-    "tag_name": "reference-request",
-    "count": "4"
+    "count": 45,
+    "excerpt_post_id": 327,
+    "wiki_post_id": 326
   },
   {
     "id": 48,
     "tag_name": "standard",
-    "count": "8",
-    "excerpt_post_id": "308",
-    "wiki_post_id": "307"
-  },
-  {
-    "id": 49,
-    "tag_name": "embedding",
-    "count": "6"
+    "count": 8,
+    "excerpt_post_id": 308,
+    "wiki_post_id": 307
   },
   {
     "id": 50,
     "tag_name": "image",
-    "count": "33",
-    "excerpt_post_id": "399",
-    "wiki_post_id": "398"
+    "count": 33,
+    "excerpt_post_id": 399,
+    "wiki_post_id": 398
   },
   {
     "id": 51,
     "tag_name": "svg",
-    "count": "3",
-    "excerpt_post_id": "104",
-    "wiki_post_id": "103"
+    "count": 3,
+    "excerpt_post_id": 104,
+    "wiki_post_id": 103
   },
   {
     "id": 52,
     "tag_name": "chapters",
-    "count": "5",
-    "excerpt_post_id": "814",
-    "wiki_post_id": "813"
+    "count": 5,
+    "excerpt_post_id": 814,
+    "wiki_post_id": 813
   },
   {
     "id": 53,
     "tag_name": "editing",
-    "count": "43",
-    "excerpt_post_id": "690",
-    "wiki_post_id": "689"
-  },
-  {
-    "id": 55,
-    "tag_name": "format",
-    "count": "9"
+    "count": 43,
+    "excerpt_post_id": 690,
+    "wiki_post_id": 689
   },
   {
     "id": 56,
     "tag_name": "creation",
-    "count": "37",
-    "excerpt_post_id": "655",
-    "wiki_post_id": "654"
+    "count": 37,
+    "excerpt_post_id": 655,
+    "wiki_post_id": 654
   },
   {
     "id": 57,
     "tag_name": "i18n",
-    "count": "1",
-    "excerpt_post_id": "242",
-    "wiki_post_id": "241"
-  },
-  {
-    "id": 58,
-    "tag_name": "maintenance",
-    "count": "3"
+    "count": 1,
+    "excerpt_post_id": 242,
+    "wiki_post_id": 241
   },
   {
     "id": 61,
     "tag_name": "dpi",
-    "count": "2",
-    "excerpt_post_id": "820",
-    "wiki_post_id": "819"
-  },
-  {
-    "id": 62,
-    "tag_name": "display",
-    "count": "8"
+    "count": 2,
+    "excerpt_post_id": 820,
+    "wiki_post_id": 819
   },
   {
     "id": 63,
     "tag_name": "history",
-    "count": "4",
-    "excerpt_post_id": "822",
-    "wiki_post_id": "821"
+    "count": 4,
+    "excerpt_post_id": 822,
+    "wiki_post_id": 821
   },
   {
     "id": 64,
     "tag_name": "epub-reader",
-    "count": "3",
-    "excerpt_post_id": "595",
-    "wiki_post_id": "594"
+    "count": 3,
+    "excerpt_post_id": 595,
+    "wiki_post_id": 594
   },
   {
     "id": 68,
     "tag_name": "free",
-    "count": "11",
-    "excerpt_post_id": "244",
-    "wiki_post_id": "243"
+    "count": 11,
+    "excerpt_post_id": 244,
+    "wiki_post_id": 243
   },
   {
     "id": 69,
     "tag_name": "download",
-    "count": "13",
-    "excerpt_post_id": "818",
-    "wiki_post_id": "817"
-  },
-  {
-    "id": 70,
-    "tag_name": "privacy",
-    "count": "4"
-  },
-  {
-    "id": 71,
-    "tag_name": "firmware",
-    "count": "6"
-  },
-  {
-    "id": 72,
-    "tag_name": "customization",
-    "count": "5"
+    "count": 13,
+    "excerpt_post_id": 818,
+    "wiki_post_id": 817
   },
   {
     "id": 73,
     "tag_name": "kobo",
-    "count": "59",
-    "excerpt_post_id": "826",
-    "wiki_post_id": "825"
-  },
-  {
-    "id": 74,
-    "tag_name": "kobo-glo",
-    "count": "11"
-  },
-  {
-    "id": 75,
-    "tag_name": "dictionaries",
-    "count": "8"
-  },
-  {
-    "id": 76,
-    "tag_name": "language",
-    "count": "5"
+    "count": 59,
+    "excerpt_post_id": 826,
+    "wiki_post_id": 825
   },
   {
     "id": 78,
     "tag_name": "lit",
-    "count": "1",
-    "excerpt_post_id": "405",
-    "wiki_post_id": "404"
-  },
-  {
-    "id": 80,
-    "tag_name": "website",
-    "count": "7"
-  },
-  {
-    "id": 83,
-    "tag_name": "programming",
-    "count": "5"
-  },
-  {
-    "id": 84,
-    "tag_name": "eyesight",
-    "count": "2"
+    "count": 1,
+    "excerpt_post_id": 405,
+    "wiki_post_id": 404
   },
   {
     "id": 85,
     "tag_name": "lcd",
-    "count": "2",
-    "excerpt_post_id": "692",
-    "wiki_post_id": "691"
-  },
-  {
-    "id": 86,
-    "tag_name": "cataloguing",
-    "count": "3"
+    "count": 2,
+    "excerpt_post_id": 692,
+    "wiki_post_id": 691
   },
   {
     "id": 89,
     "tag_name": "drm",
-    "count": "50",
-    "excerpt_post_id": "247",
-    "wiki_post_id": "246"
-  },
-  {
-    "id": 92,
-    "tag_name": "statistics",
-    "count": "4"
-  },
-  {
-    "id": 94,
-    "tag_name": "kindle-app",
-    "count": "29"
+    "count": 50,
+    "excerpt_post_id": 247,
+    "wiki_post_id": 246
   },
   {
     "id": 97,
     "tag_name": "baen-publishing",
-    "count": "3",
-    "excerpt_post_id": "808",
-    "wiki_post_id": "807"
+    "count": 3,
+    "excerpt_post_id": 808,
+    "wiki_post_id": 807
   },
   {
     "id": 99,
     "tag_name": "libreoffice",
-    "count": "5",
-    "excerpt_post_id": "1084",
-    "wiki_post_id": "1083"
+    "count": 5,
+    "excerpt_post_id": 1084,
+    "wiki_post_id": 1083
   },
   {
     "id": 100,
     "tag_name": "sony-prs-650",
-    "count": "4",
-    "excerpt_post_id": "350",
-    "wiki_post_id": "349"
+    "count": 4,
+    "excerpt_post_id": 350,
+    "wiki_post_id": 349
   },
   {
     "id": 101,
     "tag_name": "linux",
-    "count": "13",
-    "excerpt_post_id": "422",
-    "wiki_post_id": "421"
+    "count": 13,
+    "excerpt_post_id": 422,
+    "wiki_post_id": 421
   },
   {
     "id": 104,
     "tag_name": "battery",
-    "count": "8",
-    "excerpt_post_id": "810",
-    "wiki_post_id": "809"
+    "count": 8,
+    "excerpt_post_id": 810,
+    "wiki_post_id": 809
   },
   {
     "id": 106,
     "tag_name": "sleep",
-    "count": "1",
-    "excerpt_post_id": "830",
-    "wiki_post_id": "829"
+    "count": 1,
+    "excerpt_post_id": 830,
+    "wiki_post_id": 829
   },
   {
     "id": 108,
     "tag_name": "text-to-speech",
-    "count": "3",
-    "excerpt_post_id": "832",
-    "wiki_post_id": "831"
-  },
-  {
-    "id": 109,
-    "tag_name": "hyperlinking",
-    "count": "9"
-  },
-  {
-    "id": 110,
-    "tag_name": "table-of-contents",
-    "count": "19"
+    "count": 3,
+    "excerpt_post_id": 832,
+    "wiki_post_id": 831
   },
   {
     "id": 111,
     "tag_name": "cbz",
-    "count": "3",
-    "excerpt_post_id": "812",
-    "wiki_post_id": "811"
+    "count": 3,
+    "excerpt_post_id": 812,
+    "wiki_post_id": 811
   },
   {
     "id": 116,
     "tag_name": "amazon-prime",
-    "count": "2",
-    "excerpt_post_id": "806",
-    "wiki_post_id": "805"
-  },
-  {
-    "id": 117,
-    "tag_name": "kf8",
-    "count": "5"
-  },
-  {
-    "id": 119,
-    "tag_name": "android",
-    "count": "21"
+    "count": 2,
+    "excerpt_post_id": 806,
+    "wiki_post_id": 805
   },
   {
     "id": 120,
     "tag_name": "feature-comparison",
-    "count": "9",
-    "excerpt_post_id": "340",
-    "wiki_post_id": "339"
+    "count": 9,
+    "excerpt_post_id": 340,
+    "wiki_post_id": 339
   },
   {
     "id": 122,
     "tag_name": "audiobooks",
-    "count": "4",
-    "excerpt_post_id": "790",
-    "wiki_post_id": "789"
+    "count": 4,
+    "excerpt_post_id": 790,
+    "wiki_post_id": 789
   },
   {
     "id": 123,
     "tag_name": "translation",
-    "count": "7",
-    "excerpt_post_id": "788",
-    "wiki_post_id": "787"
+    "count": 7,
+    "excerpt_post_id": 788,
+    "wiki_post_id": 787
   },
   {
     "id": 124,
     "tag_name": "kindle-paperwhite",
-    "count": "76",
-    "excerpt_post_id": "786",
-    "wiki_post_id": "785"
-  },
-  {
-    "id": 125,
-    "tag_name": "apps",
-    "count": "7"
-  },
-  {
-    "id": 126,
-    "tag_name": "cleaning",
-    "count": "3"
+    "count": 76,
+    "excerpt_post_id": 786,
+    "wiki_post_id": 785
   },
   {
     "id": 127,
     "tag_name": "cleartype",
-    "count": "1",
-    "excerpt_post_id": "410",
-    "wiki_post_id": "409"
-  },
-  {
-    "id": 128,
-    "tag_name": "font-rendering",
-    "count": "8"
+    "count": 1,
+    "excerpt_post_id": 410,
+    "wiki_post_id": 409
   },
   {
     "id": 129,
     "tag_name": "cybook",
-    "count": "2",
-    "excerpt_post_id": "407",
-    "wiki_post_id": "406"
+    "count": 2,
+    "excerpt_post_id": 407,
+    "wiki_post_id": 406
   },
   {
     "id": 130,
     "tag_name": "djvu",
-    "count": "17",
-    "excerpt_post_id": "418",
-    "wiki_post_id": "417"
+    "count": 17,
+    "excerpt_post_id": 418,
+    "wiki_post_id": 417
   },
   {
     "id": 131,
     "tag_name": "epubcheck",
-    "count": "9",
-    "excerpt_post_id": "412",
-    "wiki_post_id": "411"
+    "count": 9,
+    "excerpt_post_id": 412,
+    "wiki_post_id": 411
   },
   {
     "id": 132,
     "tag_name": "sales",
-    "count": "11",
-    "excerpt_post_id": "784",
-    "wiki_post_id": "783"
-  },
-  {
-    "id": 133,
-    "tag_name": "collections",
-    "count": "5"
+    "count": 11,
+    "excerpt_post_id": 784,
+    "wiki_post_id": 783
   },
   {
     "id": 134,
     "tag_name": "sync",
-    "count": "11",
-    "excerpt_post_id": "782",
-    "wiki_post_id": "781"
+    "count": 11,
+    "excerpt_post_id": 782,
+    "wiki_post_id": 781
   },
   {
     "id": 135,
     "tag_name": "validation",
-    "count": "9",
-    "excerpt_post_id": "667",
-    "wiki_post_id": "666"
-  },
-  {
-    "id": 136,
-    "tag_name": "usability",
-    "count": "3"
-  },
-  {
-    "id": 137,
-    "tag_name": "odyssey",
-    "count": "4"
+    "count": 9,
+    "excerpt_post_id": 667,
+    "wiki_post_id": 666
   },
   {
     "id": 138,
     "tag_name": "bookeen",
-    "count": "4",
-    "excerpt_post_id": "526",
-    "wiki_post_id": "525"
+    "count": 4,
+    "excerpt_post_id": 526,
+    "wiki_post_id": 525
   },
   {
     "id": 139,
     "tag_name": "screensaver",
-    "count": "3",
-    "excerpt_post_id": "780",
-    "wiki_post_id": "779"
-  },
-  {
-    "id": 140,
-    "tag_name": "optimization",
-    "count": "4"
-  },
-  {
-    "id": 141,
-    "tag_name": "annotations",
-    "count": "24"
-  },
-  {
-    "id": 142,
-    "tag_name": "synchronization",
-    "count": "6"
-  },
-  {
-    "id": 143,
-    "tag_name": "power-management",
-    "count": "5"
+    "count": 3,
+    "excerpt_post_id": 780,
+    "wiki_post_id": 779
   },
   {
     "id": 145,
     "tag_name": "solar-power",
-    "count": "1",
-    "excerpt_post_id": "778",
-    "wiki_post_id": "777"
+    "count": 1,
+    "excerpt_post_id": 778,
+    "wiki_post_id": 777
   },
   {
     "id": 146,
     "tag_name": "charger",
-    "count": "1",
-    "excerpt_post_id": "776",
-    "wiki_post_id": "775"
+    "count": 1,
+    "excerpt_post_id": 776,
+    "wiki_post_id": 775
   },
   {
     "id": 147,
     "tag_name": "energy-usage",
-    "count": "1",
-    "excerpt_post_id": "774",
-    "wiki_post_id": "773"
-  },
-  {
-    "id": 151,
-    "tag_name": "loan",
-    "count": "3"
+    "count": 1,
+    "excerpt_post_id": 774,
+    "wiki_post_id": 773
   },
   {
     "id": 152,
     "tag_name": "rss",
-    "count": "3",
-    "excerpt_post_id": "800",
-    "wiki_post_id": "799"
+    "count": 3,
+    "excerpt_post_id": 800,
+    "wiki_post_id": 799
   },
   {
     "id": 153,
     "tag_name": "independent-publishing",
-    "count": "7",
-    "excerpt_post_id": "772",
-    "wiki_post_id": "771"
+    "count": 7,
+    "excerpt_post_id": 772,
+    "wiki_post_id": 771
   },
   {
     "id": 154,
     "tag_name": "sony-prs-t1",
-    "count": "9",
-    "excerpt_post_id": "798",
-    "wiki_post_id": "797"
+    "count": 9,
+    "excerpt_post_id": 798,
+    "wiki_post_id": 797
   },
   {
     "id": 155,
     "tag_name": "adobe-digital-editions",
-    "count": "15",
-    "excerpt_post_id": "6355",
-    "wiki_post_id": "6354"
+    "count": 15,
+    "excerpt_post_id": 6355,
+    "wiki_post_id": 6354
   },
   {
     "id": 156,
     "tag_name": "cdf",
-    "count": "1",
-    "excerpt_post_id": "796",
-    "wiki_post_id": "795"
+    "count": 1,
+    "excerpt_post_id": 796,
+    "wiki_post_id": 795
   },
   {
     "id": 157,
     "tag_name": "phone",
-    "count": "2",
-    "excerpt_post_id": "768",
-    "wiki_post_id": "767"
+    "count": 2,
+    "excerpt_post_id": 768,
+    "wiki_post_id": 767
   },
   {
     "id": 158,
     "tag_name": "tracfone",
-    "count": "1",
-    "excerpt_post_id": "770",
-    "wiki_post_id": "769"
-  },
-  {
-    "id": 160,
-    "tag_name": "sbrz",
-    "count": "2"
+    "count": 1,
+    "excerpt_post_id": 770,
+    "wiki_post_id": 769
   },
   {
     "id": 161,
     "tag_name": "library",
-    "count": "19",
-    "excerpt_post_id": "766",
-    "wiki_post_id": "765"
+    "count": 19,
+    "excerpt_post_id": 766,
+    "wiki_post_id": 765
   },
   {
     "id": 162,
     "tag_name": "accessories",
-    "count": "1",
-    "excerpt_post_id": "794",
-    "wiki_post_id": "793"
+    "count": 1,
+    "excerpt_post_id": 794,
+    "wiki_post_id": 793
   },
   {
     "id": 163,
     "tag_name": "copyright",
-    "count": "18",
-    "excerpt_post_id": "673",
-    "wiki_post_id": "672"
+    "count": 18,
+    "excerpt_post_id": 673,
+    "wiki_post_id": 672
   },
   {
     "id": 164,
     "tag_name": "4th-generation-kindle",
-    "count": "1",
-    "excerpt_post_id": "804",
-    "wiki_post_id": "803"
+    "count": 1,
+    "excerpt_post_id": 804,
+    "wiki_post_id": 803
   },
   {
     "id": 165,
     "tag_name": "adobe-reader",
-    "count": "7",
-    "excerpt_post_id": "669",
-    "wiki_post_id": "668"
+    "count": 7,
+    "excerpt_post_id": 669,
+    "wiki_post_id": 668
   },
   {
     "id": 166,
     "tag_name": "audio",
-    "count": "2",
-    "excerpt_post_id": "764",
-    "wiki_post_id": "763"
+    "count": 2,
+    "excerpt_post_id": 764,
+    "wiki_post_id": 763
   },
   {
     "id": 168,
     "tag_name": "instapaper",
-    "count": "1",
-    "excerpt_post_id": "680",
-    "wiki_post_id": "679"
+    "count": 1,
+    "excerpt_post_id": 680,
+    "wiki_post_id": 679
   },
   {
     "id": 170,
     "tag_name": "css",
-    "count": "40",
-    "excerpt_post_id": "816",
-    "wiki_post_id": "815"
+    "count": 40,
+    "excerpt_post_id": 816,
+    "wiki_post_id": 815
   },
   {
     "id": 171,
     "tag_name": "smashwords",
-    "count": "4",
-    "excerpt_post_id": "727",
-    "wiki_post_id": "726"
+    "count": 4,
+    "excerpt_post_id": 727,
+    "wiki_post_id": 726
   },
   {
     "id": 172,
     "tag_name": "operating-system",
-    "count": "2",
-    "excerpt_post_id": "762",
-    "wiki_post_id": "761"
-  },
-  {
-    "id": 173,
-    "tag_name": "cover",
-    "count": "12"
-  },
-  {
-    "id": 174,
-    "tag_name": "unbricking",
-    "count": "2"
+    "count": 2,
+    "excerpt_post_id": 762,
+    "wiki_post_id": 761
   },
   {
     "id": 176,
     "tag_name": "public-domain",
-    "count": "7",
-    "excerpt_post_id": "758",
-    "wiki_post_id": "757"
+    "count": 7,
+    "excerpt_post_id": 758,
+    "wiki_post_id": 757
   },
   {
     "id": 177,
     "tag_name": "law",
-    "count": "10",
-    "excerpt_post_id": "760",
-    "wiki_post_id": "759"
+    "count": 10,
+    "excerpt_post_id": 760,
+    "wiki_post_id": 759
   },
   {
     "id": 178,
     "tag_name": "united-states",
-    "count": "7",
-    "excerpt_post_id": "756",
-    "wiki_post_id": "755"
+    "count": 7,
+    "excerpt_post_id": 756,
+    "wiki_post_id": 755
   },
   {
     "id": 179,
     "tag_name": "tos",
-    "count": "3",
-    "excerpt_post_id": "751",
-    "wiki_post_id": "750"
+    "count": 3,
+    "excerpt_post_id": 751,
+    "wiki_post_id": 750
   },
   {
     "id": 180,
     "tag_name": "canada",
-    "count": "3",
-    "excerpt_post_id": "754",
-    "wiki_post_id": "753"
-  },
-  {
-    "id": 181,
-    "tag_name": "kobo-store",
-    "count": "4"
+    "count": 3,
+    "excerpt_post_id": 754,
+    "wiki_post_id": 753
   },
   {
     "id": 182,
     "tag_name": "united-kingdom",
-    "count": "1",
-    "excerpt_post_id": "907",
-    "wiki_post_id": "906"
-  },
-  {
-    "id": 183,
-    "tag_name": "security",
-    "count": "5"
+    "count": 1,
+    "excerpt_post_id": 907,
+    "wiki_post_id": 906
   },
   {
     "id": 184,
     "tag_name": "isbn",
-    "count": "9",
-    "excerpt_post_id": "1081",
-    "wiki_post_id": "1080"
+    "count": 9,
+    "excerpt_post_id": 1081,
+    "wiki_post_id": 1080
   },
   {
     "id": 186,
     "tag_name": "ibooks",
-    "count": "28",
-    "excerpt_post_id": "871",
-    "wiki_post_id": "870"
+    "count": 28,
+    "excerpt_post_id": 871,
+    "wiki_post_id": 870
   },
   {
     "id": 188,
     "tag_name": "search-engine",
-    "count": "6",
-    "excerpt_post_id": "909",
-    "wiki_post_id": "908"
+    "count": 6,
+    "excerpt_post_id": 909,
+    "wiki_post_id": 908
   },
   {
     "id": 189,
     "tag_name": "united-arab-emirates",
-    "count": "1",
-    "excerpt_post_id": "911",
-    "wiki_post_id": "910"
+    "count": 1,
+    "excerpt_post_id": 911,
+    "wiki_post_id": 910
   },
   {
     "id": 190,
     "tag_name": "kindle-pc-reader",
-    "count": "3",
-    "excerpt_post_id": "915",
-    "wiki_post_id": "914"
+    "count": 3,
+    "excerpt_post_id": 915,
+    "wiki_post_id": 914
   },
   {
     "id": 191,
     "tag_name": "kindle-cloud-reader",
-    "count": "9",
-    "excerpt_post_id": "913",
-    "wiki_post_id": "912"
-  },
-  {
-    "id": 194,
-    "tag_name": "sony",
-    "count": "5"
-  },
-  {
-    "id": 196,
-    "tag_name": "kindle-previewer",
-    "count": "3"
+    "count": 9,
+    "excerpt_post_id": 913,
+    "wiki_post_id": 912
   },
   {
     "id": 198,
     "tag_name": "metadata",
-    "count": "19",
-    "excerpt_post_id": "2392",
-    "wiki_post_id": "2391"
+    "count": 19,
+    "excerpt_post_id": 2392,
+    "wiki_post_id": 2391
   },
   {
     "id": 199,
     "tag_name": "sigil",
-    "count": "14",
-    "excerpt_post_id": "2454",
-    "wiki_post_id": "2453"
+    "count": 14,
+    "excerpt_post_id": 2454,
+    "wiki_post_id": 2453
   },
   {
     "id": 200,
     "tag_name": "pdb",
-    "count": "1",
-    "excerpt_post_id": "1088",
-    "wiki_post_id": "1087"
-  },
-  {
-    "id": 201,
-    "tag_name": "ncx",
-    "count": "5"
-  },
-  {
-    "id": 202,
-    "tag_name": "opf",
-    "count": "5"
-  },
-  {
-    "id": 207,
-    "tag_name": "printed",
-    "count": "8"
+    "count": 1,
+    "excerpt_post_id": 1088,
+    "wiki_post_id": 1087
   },
   {
     "id": 210,
     "tag_name": "indesign",
-    "count": "19",
-    "excerpt_post_id": "1130",
-    "wiki_post_id": "1129"
+    "count": 19,
+    "excerpt_post_id": 1130,
+    "wiki_post_id": 1129
   },
   {
     "id": 213,
     "tag_name": "mac-os",
-    "count": "2",
-    "excerpt_post_id": "1179",
-    "wiki_post_id": "1178"
+    "count": 2,
+    "excerpt_post_id": 1179,
+    "wiki_post_id": 1178
   },
   {
     "id": 214,
     "tag_name": "ebook-management",
-    "count": "49",
-    "excerpt_post_id": "4714",
-    "wiki_post_id": "4713"
-  },
-  {
-    "id": 215,
-    "tag_name": "fixed-layout",
-    "count": "7"
-  },
-  {
-    "id": 217,
-    "tag_name": "formatting",
-    "count": "22"
-  },
-  {
-    "id": 227,
-    "tag_name": "kindlegen",
-    "count": "7"
-  },
-  {
-    "id": 228,
-    "tag_name": "pocket",
-    "count": "3"
-  },
-  {
-    "id": 229,
-    "tag_name": "google-play-books",
-    "count": "25"
-  },
-  {
-    "id": 233,
-    "tag_name": "footnotes",
-    "count": "9"
-  },
-  {
-    "id": 235,
-    "tag_name": "media-queries",
-    "count": "5"
-  },
-  {
-    "id": 236,
-    "tag_name": "hyphenation",
-    "count": "3"
-  },
-  {
-    "id": 239,
-    "tag_name": "ios",
-    "count": "3"
+    "count": 49,
+    "excerpt_post_id": 4714,
+    "wiki_post_id": 4713
   },
   {
     "id": 240,
     "tag_name": "ocr",
-    "count": "8",
-    "excerpt_post_id": "6410",
-    "wiki_post_id": "6409"
+    "count": 8,
+    "excerpt_post_id": 6410,
+    "wiki_post_id": 6409
   },
   {
     "id": 242,
     "tag_name": "license",
-    "count": "4",
-    "excerpt_post_id": "6488",
-    "wiki_post_id": "6487"
-  },
-  {
-    "id": 244,
-    "tag_name": "page-break",
-    "count": "7"
+    "count": 4,
+    "excerpt_post_id": 6488,
+    "wiki_post_id": 6487
   },
   {
     "id": 245,
     "tag_name": "pandoc",
-    "count": "2",
-    "excerpt_post_id": "6554",
-    "wiki_post_id": "6553"
-  },
-  {
-    "id": 248,
-    "tag_name": "azw",
-    "count": "3"
+    "count": 2,
+    "excerpt_post_id": 6554,
+    "wiki_post_id": 6553
   },
   {
     "id": 254,
     "tag_name": "tolino",
-    "count": "1",
-    "excerpt_post_id": "7188",
-    "wiki_post_id": "7187"
+    "count": 1,
+    "excerpt_post_id": 7188,
+    "wiki_post_id": 7187
   },
   {
     "id": 255,
     "tag_name": "integrity",
-    "count": "2",
-    "excerpt_post_id": "7225",
-    "wiki_post_id": "7224"
+    "count": 2,
+    "excerpt_post_id": 7225,
+    "wiki_post_id": 7224
   },
   {
     "id": 256,
     "tag_name": "humble-bundle",
-    "count": "1",
-    "excerpt_post_id": "7223",
-    "wiki_post_id": "7222"
-  },
-  {
-    "id": 258,
-    "tag_name": "container.xml",
-    "count": "2"
-  },
-  {
-    "id": 260,
-    "tag_name": "acsm",
-    "count": "4"
-  },
-  {
-    "id": 262,
-    "tag_name": "server",
-    "count": "4"
-  },
-  {
-    "id": 264,
-    "tag_name": "guide",
-    "count": "2"
-  },
-  {
-    "id": 265,
-    "tag_name": "certificate",
-    "count": "1"
+    "count": 1,
+    "excerpt_post_id": 7223,
+    "wiki_post_id": 7222
   }
 ]
