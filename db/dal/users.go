@@ -44,6 +44,9 @@ func (_dal *PostgresUsersDAL) UpsertUser(ctx context.Context, id int, displayNam
 	})
 
 	if err != nil {
+		if log.GetLevel() >= log.ErrorLevel {
+			log.Errorf("Got error while upserting user with id %d: %s", id, err.Error())
+		}
 		return models.User{}, errors.WithRootCause(merry.New("failed to insert user"), err)
 	}
 
