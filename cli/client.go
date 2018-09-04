@@ -131,17 +131,14 @@ func readPosts(file *os.File, posts chan <- models.Post) {
 	//close(posts)
 }
 
-func sortInputs(users chan models.User, posts chan models.Post) chan RequestDescriptor {
+func sortInputs(users chan models.User, _ chan models.Post) chan RequestDescriptor {
 	outputChannel := make(chan RequestDescriptor)
 
 	go func() {
 		var user models.User
 		var usersOk bool
 
-		select {
-		case user, usersOk = <-users:
-		default:
-		}
+		user, usersOk = <-users
 
 		for usersOk {
 			outputChannel <- RequestDescriptor{
@@ -149,11 +146,10 @@ func sortInputs(users chan models.User, posts chan models.Post) chan RequestDesc
 				Data: user,
 			}
 
-			select {
-			case user, usersOk = <-users:
-			default:
-			}
+			user, usersOk = <-users
 		}
+
+		close(outputChannel)
 	}()
 
 	return outputChannel
