@@ -2,13 +2,13 @@ require 'nokogiri'
 require 'pathname'
 require 'json'
 
- def underscore(camel_cased_word)
+def underscore(camel_cased_word)
   camel_cased_word.to_s.gsub(/::/, '/').
     gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
     gsub(/([a-z\d])([A-Z])/,'\1_\2').
     tr("-", "_").
     downcase
- end
+end
 
 args = ARGV.clone
 ifile = args.shift
@@ -51,7 +51,7 @@ output = []
 nodes.each do |node|
   node_data = {}
   node.keys.each do |k|
-    if k == "id"
+    if %w(id post_type_id accepted_answer_id score view_count owner_user_id last_editor_user_id answer_count comment_count favorite_count user_id class post_id count excerpt_post_id wiki_post_id reputation views up_votes down_votes account_id vote_type_id).include? k
       node_data[underscore(k)] = node[k].to_i
     else
       node_data[underscore(k)] = node[k]

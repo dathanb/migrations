@@ -13,42 +13,11 @@ func TestPostgresUsersDAL_UpsertUser(t *testing.T) {
 	db, mock, err := getMockDB()
 	assert.NoError(t, err, "Failed to mock the db")
 
-	t.Run("Inserts new user if one doesn't already exist", func(t *testing.T) {
+	t.Run("Upserts new user", func(t *testing.T) {
 		mock.ExpectBegin()
 
-		rows := sqlmock.
-			NewRows([]string{""})
-
-		mock.ExpectQuery("select 1 from users where id = \\$1").
-			WithArgs(1).
-			WillReturnRows(rows) // Empty result set means no matching records
-
-		mock.ExpectExec("insert into users\\(id, display_name\\) values \\(\\?, \\?\\)").
+		mock.ExpectExec("insert into users\\(id, display_name\\) values \\(\\?, \\?\\) on conflict \\(id\\) do update set display_name = EXCLUDED.display_name").
 			WithArgs(1, "Test user").
-			WillReturnResult(sqlmock.NewResult(1, 1))
-
-		mock.ExpectCommit()
-
-		dal := NewUsersDAL(db)
-		_, err := dal.UpsertUser(context.TODO(), 1, "Test user")
-		assert.NoError(t, err)
-
-		assert.NoError(t, mock.ExpectationsWereMet(), "Mock Expectations")
-	})
-
-	t.Run("Updates existing user", func(t *testing.T) {
-		mock.ExpectBegin()
-
-		rows := sqlmock.
-			NewRows([]string{""}).
-			AddRow(1)
-
-		mock.ExpectQuery("select 1 from users where id = \\$1").
-			WithArgs(1).
-			WillReturnRows(rows)
-
-		mock.ExpectExec("update users set display_name = \\? where id = \\?").
-			WithArgs("Test user", 1).
 			WillReturnResult(sqlmock.NewResult(1, 1))
 
 		mock.ExpectCommit()
