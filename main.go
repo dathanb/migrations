@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/sirupsen/logrus"
-	"github.com/udacity/migration-demo/cli"
+	"github.com/dathanb/fakestack/cli"
 	"os"
 )
 

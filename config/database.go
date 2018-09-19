@@ -12,7 +12,7 @@ type PostgresDbConfig struct {
 	Password string `default:"password"`
 	Port     int    `default:"5432"`
 	Host     string `default:"localhost"`
-	DbName   string `default:"migration-demo"`
+	DbName   string `default:"fakestack"`
 	SslMode  string `split_words:"true"`
 }
 

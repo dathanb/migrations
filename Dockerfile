@@ -1,15 +1,15 @@
 FROM golang:1.11
 
-RUN mkdir -p /go/src/github.com/udacity/migration-demo
-COPY . /go/src/github.com/udacity/migration-demo/
+RUN mkdir -p /go/src/github.com/dathanb/fakestack
+COPY . /go/src/github.com/dathanb/fakestack
 ENV GOPATH /go
-WORKDIR /go/src/github.com/udacity/migration-demo
+WORKDIR /go/src/github.com/dathanb/fakestack
 RUN make build
 
 FROM golang:1.11
 
 RUN mkdir /app
 WORKDIR /app
-COPY --from=0 /go/src/github.com/udacity/migration-demo/migration-demo /app/
+COPY --from=0 /go/src/github.com/dathanb/fakestack/fakestack /app/
 
-CMD ["./migration-demo", "start"]
+CMD ["./fakestack", "start"]

@@ -5,7 +5,7 @@ import (
 	"github.com/udacity/go-errors"
 	"encoding/json"
 	"io/ioutil"
-	"github.com/udacity/migration-demo/db"
+	"github.com/dathanb/fakestack/db"
 	"github.com/sirupsen/logrus"
 )
 

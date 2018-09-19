@@ -2,8 +2,8 @@ package cli
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/udacity/migration-demo/db"
-	"github.com/udacity/migration-demo/config"
+	"github.com/dathanb/fakestack/db"
+	"github.com/dathanb/fakestack/config"
 	"fmt"
 	"github.com/udacity/go-errors"
 	"github.com/ansel1/merry"

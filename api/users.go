@@ -3,8 +3,8 @@ package api
 import (
 	"github.com/jamesbibby/swag/swagger"
 	"github.com/jamesbibby/swag/endpoint"
-	"github.com/udacity/migration-demo/handler"
-	"github.com/udacity/migration-demo/utils"
+	"github.com/dathanb/fakestack/handler"
+	"github.com/dathanb/fakestack/utils"
 )
 
 func GetUsersEndpoints() []*swagger.Endpoint {

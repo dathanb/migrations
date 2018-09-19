@@ -6,7 +6,7 @@ import (
 	"github.com/jmoiron/sqlx"
 	log "github.com/sirupsen/logrus"
 	"github.com/udacity/go-errors"
-	"github.com/udacity/migration-demo/models"
+	"github.com/dathanb/fakestack/models"
 )
 
 type PostsDAL interface {
