@@ -1,12 +1,12 @@
 package handler
 
 import (
-	"net/http"
-	"github.com/udacity/go-errors"
 	"encoding/json"
-	"io/ioutil"
+	"github.com/ansel1/merry"
 	"github.com/dathanb/fakestack/db"
 	"github.com/sirupsen/logrus"
+	"io/ioutil"
+	"net/http"
 )
 
 type CreateUserRequest struct {
@@ -20,21 +20,21 @@ func RegisterUserEndpoint(request *http.Request, vars map[string]string) ([]byte
 
 	body, err := ioutil.ReadAll(request.Body)
 	if err != nil {
-		return nil, 0, errors.WithRootCause(errors.HTTPError, err)
+		return nil, 0, merry.WithHTTPCode(err, 500)
 	}
 	err = json.Unmarshal(body, &reqObject)
 	if err != nil {
-		return nil, 0, errors.WithRootCause(errors.HTTPBadRequestError, err)
+		return nil, 0, merry.WithHTTPCode(err, 400)
 	}
 
 	user, err := db.ApplicationDAL().Users().UpsertUser(request.Context(), reqObject.Id, reqObject.DisplayName)
 	if err != nil {
-		return nil, 0, errors.WithRootCause(errors.SQLCommitError, err)
+		return nil, 0, merry.WithHTTPCode(err, 500)
 	}
 
 	data, err := json.Marshal(user)
 	if err != nil {
-		return nil, 0, errors.WithRootCause(errors.JSONMarshalingError, err)
+		return nil, 0, merry.WithHTTPCode(err, 500)
 	}
 
 	return data, 200, nil

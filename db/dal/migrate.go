@@ -1,11 +1,10 @@
 package dal
 
 import (
-	"github.com/rubenv/sql-migrate"
-	"github.com/jmoiron/sqlx"
-	"github.com/dathanb/fakestack/config"
-	"github.com/udacity/go-errors"
 	"github.com/ansel1/merry"
+	"github.com/dathanb/fakestack/config"
+	"github.com/jmoiron/sqlx"
+	"github.com/rubenv/sql-migrate"
 	"github.com/sirupsen/logrus"
 )
 
@@ -34,7 +33,7 @@ func (migrationDAL *MigrationDALImpl) MigrateUp() error {
 
 	count, err := migrate.ExecMax(migrationDAL.db.DB, migrationDAL.cfg.DriverName(), migrations, migrate.Up, 0)
 	if err != nil {
-		return errors.WithRootCause(merry.New("Failed to migrate"), err)
+		return merry.WithUserMessage(err, "Failed to migrate")
 	}
 
 	logrus.Info("Migrated %d files\n", count)
@@ -50,7 +49,7 @@ func (migrationDAL *MigrationDALImpl) MigrateDown() error {
 
 	count, err := migrate.ExecMax(migrationDAL.db.DB, migrationDAL.cfg.DriverName(), migrations, migrate.Down, 1)
 	if err != nil {
-		return errors.WithRootCause(merry.New("Failed to migrate"), err)
+		return merry.WithUserMessage(err, "Failed to migrate")
 	}
 
 	logrus.Info("Migrated %d files\n", count)

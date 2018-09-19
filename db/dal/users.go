@@ -5,7 +5,6 @@ import (
 	"github.com/ansel1/merry"
 	"github.com/jmoiron/sqlx"
 	log "github.com/sirupsen/logrus"
-	"github.com/udacity/go-errors"
 	"github.com/dathanb/fakestack/models"
 )
 
@@ -30,7 +29,7 @@ func (_dal *PostgresUsersDAL) UpsertUser(ctx context.Context, id int, displayNam
 		if log.GetLevel() >= log.ErrorLevel {
 			log.Errorf("Could not begin transaction to upsert user %d", id)
 		}
-		return models.User{}, errors.WithRootCause(merry.New("failed to begin transaction"), err)
+		return models.User{}, merry.WithUserMessage(err, "Failed to begin transaction")
 	}
 
 	defer tx.Rollback()
@@ -47,12 +46,12 @@ func (_dal *PostgresUsersDAL) UpsertUser(ctx context.Context, id int, displayNam
 		if log.GetLevel() >= log.ErrorLevel {
 			log.Errorf("Got error while upserting user with id %d: %s", id, err.Error())
 		}
-		return models.User{}, errors.WithRootCause(merry.New("failed to insert user"), err)
+		return models.User{}, merry.WithUserMessage(err, "Failed to insert user")
 	}
 
 	err = tx.Commit()
 	if err != nil {
-		return models.User{}, errors.WithRootCause(merry.New("failed to insert user"), err)
+		return models.User{}, merry.WithUserMessage(err, "Failed to insert user")
 	}
 
 	return models.User{Id: id, DisplayName: displayName}, nil

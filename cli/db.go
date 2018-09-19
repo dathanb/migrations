@@ -1,12 +1,11 @@
 package cli
 
 import (
-	"github.com/spf13/cobra"
-	"github.com/dathanb/fakestack/db"
-	"github.com/dathanb/fakestack/config"
 	"fmt"
-	"github.com/udacity/go-errors"
 	"github.com/ansel1/merry"
+	"github.com/dathanb/fakestack/config"
+	"github.com/dathanb/fakestack/db"
+	"github.com/spf13/cobra"
 )
 
 var dbCmd = &cobra.Command{
@@ -29,12 +28,12 @@ var dbMigrateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		cfg, err := config.LoadConfig()
 		if err != nil {
-			panic(errors.WithRootCause(merry.New("Failed to load config"), err))
+			panic(merry.WithUserMessage(err, "Failed to load config"))
 		}
 
 		err = db.InitDAL(cfg)
 		if err != nil {
-			panic(errors.WithRootCause(merry.New("Failed to initialize data access layer"), err))
+			panic(merry.WithMessage(err, "Failed to initialize data access layer"))
 		}
 
 		dal := db.ApplicationDAL()
@@ -42,12 +41,12 @@ var dbMigrateCmd = &cobra.Command{
 		if dbMigrateUp {
 			err = dal.Migrations().MigrateUp()
 			if err != nil {
-				panic(errors.WithRootCause(merry.New("Failed to migrate"), err))
+				panic(merry.WithMessage(err, "Failed to migrate"))
 			}
 		} else if dbMigrateDown {
 			err = dal.Migrations().MigrateDown()
 			if err != nil {
-				panic(errors.WithRootCause(merry.New("Failed to migrate"), err))
+				panic(merry.WithMessage(err, "Failed to migrate"))
 			}
 		} else {
 			fmt.Print("Must specify one of --up or --down")
@@ -63,12 +62,12 @@ var dbVersionCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args[] string) {
 		cfg, err := config.LoadConfig()
 		if err != nil {
-			panic(errors.WithRootCause(merry.New("Failed to load config"), err))
+			panic(merry.WithUserMessage(err, "Failed to load config"))
 		}
 
 		err = db.InitDAL(cfg)
 		if err != nil {
-			panic(errors.WithRootCause(merry.New("Failed to initialize data access layer"), err))
+			panic(merry.WithMessage(err, "Failed to initialize data access layer"))
 		}
 
 		version, err := db.ApplicationDAL().Migrations().GetDBVersion()
