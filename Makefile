@@ -5,15 +5,15 @@ GO_FILES = $(shell find main.go api cli config db handler vendor -type f | sort)
 all: build
 
 run-dev: build
-	bin/local_env.sh ./migration-demo start
+	bin/local_env.sh ./fakestack start
 
-build: migration-demo
+build: fakestack
 
-migration-demo: $(GO_FILES)
+fakestack: $(GO_FILES)
 	go build
 
 test: build
 	go test -v ./...
 
 docker:
-	docker build -t migration-demo .
+	docker build -t fakestack .

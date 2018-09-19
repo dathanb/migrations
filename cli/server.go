@@ -2,9 +2,9 @@ package cli
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/udacity/migration-demo/api"
-	"github.com/udacity/migration-demo/config"
-	"github.com/udacity/migration-demo/db"
+	"github.com/dathanb/fakestack/api"
+	"github.com/dathanb/fakestack/config"
+	"github.com/dathanb/fakestack/db"
 	"github.com/sirupsen/logrus"
 )
 

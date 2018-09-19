@@ -3,7 +3,7 @@ package dal
 import (
 	"github.com/rubenv/sql-migrate"
 	"github.com/jmoiron/sqlx"
-	"github.com/udacity/migration-demo/config"
+	"github.com/dathanb/fakestack/config"
 	"github.com/udacity/go-errors"
 	"github.com/ansel1/merry"
 	"github.com/sirupsen/logrus"

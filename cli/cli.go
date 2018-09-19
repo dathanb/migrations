@@ -5,8 +5,8 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use: "migration-demo <command> [flags]",
-	Short: "Migration Demo",
+	Use: "fakestack <command> [flags]",
+	Short: "Fake StackExchange service",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Usage()
 	},
