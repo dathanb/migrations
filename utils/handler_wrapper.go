@@ -1,11 +1,10 @@
 package utils
 
 import (
-	"net/http"
-	"github.com/gorilla/mux"
-	"github.com/udacity/go-errors"
-	"github.com/ansel1/merry"
 	"encoding/json"
+	"github.com/ansel1/merry"
+	"github.com/gorilla/mux"
+	"net/http"
 )
 
 // WrapHandler Extract attributes of merry error and write them to ResponseWriter
@@ -17,10 +16,10 @@ func WrapHandler(handler func(request *http.Request, vars map[string]string) ([]
 
 		logger := Logger(request.Context())
 		if err != nil {
-			logger.WithFields(errors.AsFields(err)).Error(err)
+			logger.Error(err)
 
 			var message string
-			rootError := errors.RootCause(err)
+			rootError := err
 			if rootError != nil {
 				message = merry.Message(rootError)
 			} else {
@@ -37,8 +36,8 @@ func WrapHandler(handler func(request *http.Request, vars map[string]string) ([]
 		_, err = writer.Write(buf)
 
 		if err != nil {
-			err = errors.WithRootCause(errors.UnexpectedError, err).WithMessage("Unable to write to response writer")
-			logger.WithFields(errors.AsFields(err)).WithError(err).Error(err)
+			err = merry.WithHTTPCode(err, 500).WithMessage("Unable to write to response writer")
+			logger.WithError(err).Error(err)
 			http.Error(writer, err.Error(), http.StatusInternalServerError)
 		}
 	}
@@ -47,14 +46,5 @@ func WrapHandler(handler func(request *http.Request, vars map[string]string) ([]
 
 func getHTTPStatus(err error) int {
 	code := merry.HTTPCode(err)
-	if errors.IsCausedBy(err, errors.ArgumentError) {
-		code = http.StatusBadRequest
-	} else if errors.IsCausedBy(err, errors.SQLUniquenessConstraintError) {
-		code = http.StatusConflict
-	} else if errors.IsCausedBy(err, errors.SQLConstraintViolationError) {
-		code = http.StatusConflict
-	} else if errors.IsCausedBy(err, errors.RequestBodyError) {
-		code = http.StatusBadRequest
-	}
 	return code
 }

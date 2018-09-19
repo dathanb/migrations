@@ -5,7 +5,6 @@ import (
 	"github.com/ansel1/merry"
 	"github.com/jmoiron/sqlx"
 	log "github.com/sirupsen/logrus"
-	"github.com/udacity/go-errors"
 	"github.com/dathanb/fakestack/models"
 )
 
@@ -30,7 +29,7 @@ func (_dal *PostgresPostsDAL) UpsertPost(ctx context.Context, id int, postType i
 		if log.GetLevel() >= log.ErrorLevel {
 			log.Errorf("Could not begin transaction to upsert post with id %d", id)
 		}
-		return models.Post{}, errors.WithRootCause(merry.New("Failed to begin transaction"), err)
+		return models.Post{}, merry.WithUserMessage(err, "Failed to begin transaction")
 	}
 
 	defer tx.Rollback()
@@ -56,12 +55,12 @@ body = EXCLUDED.body`, map[string]interface{}{
 		if log.GetLevel() >= log.ErrorLevel {
 			log.Errorf("Got error while upserting post with id %d: %s", id, err.Error())
 		}
-		return models.Post{}, errors.WithRootCause(merry.New("failed to insert post"), err)
+		return models.Post{}, merry.WithUserMessage(err, "Failed to insert post")
 	}
 
 	err = tx.Commit()
 	if err != nil {
-		return models.Post{}, errors.WithRootCause(merry.New("failed to insert post"), err)
+		return models.Post{}, merry.WithUserMessage(err, "Failed to insert post")
 	}
 
 	return models.Post{Id: id, PostType: postType, UserId: userId, Body: body}, nil
