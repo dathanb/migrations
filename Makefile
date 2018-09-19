@@ -14,3 +14,6 @@ migration-demo: $(GO_FILES)
 
 test: build
 	go test -v ./...
+
+docker:
+	docker build -t migration-demo .
