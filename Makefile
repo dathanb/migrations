@@ -1,6 +1,7 @@
 .PHONY: all build run-dev
 
 GO_FILES = $(shell find main.go api cli config db handler vendor -type f | sort)
+VERSION = $(shell git describe)
 
 all: build
 
@@ -17,3 +18,4 @@ test: build
 
 docker:
 	docker build -t fakestack .
+	docker tag fakestack:latest fakestack:$(VERSION)
