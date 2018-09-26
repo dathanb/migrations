@@ -17,12 +17,12 @@ func LoadConfig() (*Config, error) {
 	var serverConfig SimpleServerConfig
 	var err error
 
-	err = envconfig.Process("MIGRATION_DEMO_DB", &dbConfig)
+	err = envconfig.Process("FAKESTACK_DB", &dbConfig)
 	if err != nil {
 		return nil, err
 	}
 
-	err = envconfig.Process("MIGRATION_DEMO_SERVER", &serverConfig)
+	err = envconfig.Process("FAKESTACK_SERVER", &serverConfig)
 
 	return &Config{
 		&dbConfig,
