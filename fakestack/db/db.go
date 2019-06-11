@@ -3,8 +3,8 @@ package db
 import (
 	_ "github.com/lib/pq"
 	"github.com/jmoiron/sqlx"
-	"github.com/dathanb/fakestack/db/dal"
-	"github.com/dathanb/fakestack/config"
+	"github.com/dathanb/migrations/fakestack/db/dal"
+	"github.com/dathanb/migrations/fakestack/config"
 )
 
 var globalDal DAL

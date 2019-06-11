@@ -4,6 +4,7 @@ go 1.12
 
 require (
 	github.com/ansel1/merry v1.1.0
+	github.com/dathanb/fakestack v0.0.0-20180926040016-47115ef194cd
 	github.com/davecgh/go-spew v1.1.0
 	github.com/gorilla/context v1.1.1
 	github.com/gorilla/mux v1.6.2

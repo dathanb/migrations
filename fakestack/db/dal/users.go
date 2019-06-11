@@ -5,7 +5,7 @@ import (
 	"github.com/ansel1/merry"
 	"github.com/jmoiron/sqlx"
 	log "github.com/sirupsen/logrus"
-	"github.com/dathanb/fakestack/models"
+	"github.com/dathanb/migrations/fakestack/models"
 )
 
 type UsersDAL interface {

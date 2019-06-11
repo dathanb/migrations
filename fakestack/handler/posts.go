@@ -3,7 +3,7 @@ package handler
 import (
 	"encoding/json"
 	"github.com/ansel1/merry"
-	"github.com/dathanb/fakestack/db"
+	"github.com/dathanb/migrations/fakestack/db"
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"

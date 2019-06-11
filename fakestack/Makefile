@@ -1,7 +1,7 @@
 .PHONY: all build run-dev
 
-GO_FILES = $(shell find main.go api cli config db handler vendor -type f | sort)
-VERSION = $(shell git describe)
+GO_FILES=$(shell find main.go api cli config db handler vendor -type f | sort)
+VERSION=$(shell git describe)
 
 all: build
 

@@ -2,7 +2,7 @@ package dal
 
 import (
 	"github.com/ansel1/merry"
-	"github.com/dathanb/fakestack/config"
+	"github.com/dathanb/migrations/fakestack/config"
 	"github.com/jmoiron/sqlx"
 	"github.com/rubenv/sql-migrate"
 	"github.com/sirupsen/logrus"

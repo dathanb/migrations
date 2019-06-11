@@ -2,9 +2,9 @@ package cli
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/dathanb/fakestack/api"
-	"github.com/dathanb/fakestack/config"
-	"github.com/dathanb/fakestack/db"
+	"github.com/dathanb/migrations/fakestack/api"
+	"github.com/dathanb/migrations/fakestack/config"
+	"github.com/dathanb/migrations/fakestack/db"
 	"github.com/sirupsen/logrus"
 )
 

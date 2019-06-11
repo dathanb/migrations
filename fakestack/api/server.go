@@ -32,7 +32,7 @@ func SwaggerApi() *swagger.API {
 		swag.Endpoints(endpoints...),
 		swag.Description("A Q&A service"),
 		swag.BasePath("/api/v1"),
-		swag.ContactEmail("dathan@uacity.com"),
+		swag.ContactEmail("dathan@gmail.com"),
 		swag.Tag("Name", "QA Demo"),
 	)
 }
