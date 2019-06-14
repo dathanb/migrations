@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$PROJECT_DIR"
+
+if [ ! -f "pid/nginx.pid" ]; then
+  printf "nginx does not appear to be running\n"
+  exit 1
+fi
+
+docker exec fakestack-nginx nginx -s reload
