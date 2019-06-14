@@ -11,5 +11,6 @@ docker run \
   --cidfile=pid/db.pid \
   -e POSTGRES_USER=postgres \
   -e POSTGRES_PASSWORD=postgres \
+  --network fakestack-network \
   postgres
 

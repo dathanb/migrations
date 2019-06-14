@@ -12,6 +12,7 @@ for f in pid/*; do
   fi
 done
 
-bin/start-network.sh
-bin/start-postgres.sh
-bin/start-envoy.sh
+bin/start-network
+bin/start-postgres
+bin/start-fakestack
+bin/start-nginx

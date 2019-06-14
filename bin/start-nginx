@@ -16,4 +16,5 @@ docker run \
   --name fakestack-nginx \
   -v "$(pwd)/tmp/nginx.conf:/etc/nginx/nginx.conf" \
   -p 8080:8080 \
+  --network fakestack-network \
 	nginx
