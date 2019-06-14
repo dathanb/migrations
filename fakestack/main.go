@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/sirupsen/logrus"
-	"github.com/dathanb/fakestack/cli"
+	"github.com/dathanb/migrations/fakestack/cli"
 	"os"
 )
 

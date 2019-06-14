@@ -1,4 +1,4 @@
-FROM golang:1.11
+FROM golang:1.12
 
 RUN mkdir -p /go/src/github.com/dathanb/migrations/fakestack
 COPY . /go/src/github.com/dathanb/migrations/fakestack
@@ -6,7 +6,7 @@ ENV GOPATH /go
 WORKDIR /go/src/github.com/dathanb/migrations/fakestack
 RUN make build
 
-FROM golang:1.11
+FROM golang:1.12
 
 RUN mkdir /app
 WORKDIR /app

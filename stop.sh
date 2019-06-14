@@ -1,6 +1,8 @@
 #!/bin/bash
 
-for f in pid/*.pid; do
+set +e
+
+for f in `find pid -type f`; do
   docker stop `cat $f`
   rm $f
 done

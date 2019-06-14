@@ -9,9 +9,4 @@ for f in pid/*; do
   fi
 done
 
-docker run \
-  --name fakestack_db \
-  --rm \
-  -d \
-  --cidfile=pid/db.pid \
-  postgres
+./start-postgres.sh
