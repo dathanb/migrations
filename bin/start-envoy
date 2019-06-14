@@ -12,10 +12,9 @@ printf "starting envoy: "
 
 docker run \
   -d \
-  --rm \
   --cidfile=pid/envoy.pid \
   --name fakestack-envoy \
-  --init \
   -v "$(pwd)/tmp/envoy.yaml:/etc/envoy.yaml" \
+  -p 9901:9901 \
   fakestack-envoy
 

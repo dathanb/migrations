@@ -12,5 +12,7 @@ printf " done\n"
 for f in `find pid -type f`; do
   printf "Stopping container for $(basename "$f"): "
   docker stop `cat $f`
+  printf "Removing container for $(basename "$f"): "
+  docker rm `cat $f`
   rm $f
 done

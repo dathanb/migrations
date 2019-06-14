@@ -7,7 +7,6 @@ printf "starting fakestack: "
 
 docker run \
   --name fakestack \
-  --rm \
   --cidfile=pid/fakestack.pid \
   -e FAKESTACK_DB_USERNAME=postgres \
   -e FAKESTACK_DB_PASSWORD=password \

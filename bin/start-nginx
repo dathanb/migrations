@@ -1,0 +1,19 @@
+#!/bin/bash
+
+PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$PROJECT_DIR"
+
+rm -rf tmp
+mkdir -p tmp
+
+cp nginx/nginx.conf tmp/
+
+printf "starting nginx: "
+
+docker run \
+  -d \
+  --cidfile=pid/nginx.pid \
+  --name fakestack-nginx \
+  -v "$(pwd)/tmp/nginx.conf:/etc/nginx/nginx.conf" \
+  -p 8080:8080 \
+	nginx

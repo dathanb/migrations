@@ -117,3 +117,24 @@ So we might have to start up fakestack first, then start Envoy pointing to fakes
 able to start envoy first and then bootstrap the fakestack cluster through the same procedure we'll use to start an
 updated fakestack cluster. I'll have to look into that -- maybe we'll get lucky and Envoy will support listeners with
 empty clusters.
+
+# 2019-06-13
+
+I have some basic but nice scripts for starting and stopping the basic infrastructure (docker network, postgres, envoy).
+I think the `tini` init running in Docker should forward `SIGHUP` to envoy, which should trigger a restart. Need to
+double-check that, though.
+
+Actually, it looks like we might have to run a Python script to handle the sighup and actually do the hot reloading. I
+tested without the Python script and tini seems to translate SIGHUP to SIGTERM, so the whole container just exits.
+
+So I'll download the python hot restart wrapper and use it instead of tini.
+
+No luck yet -- and it appears that the hot restart wrapper actually swallows sigterm and prevents graceful shutdown. So
+maybe back to square one.
+
+# 2019-06-14
+
+Turns out I wasn't rebuilding the Docker image. :facepalm: But once I did, and passed the `--restart-epoch` to envoy, I
+start getting a failure due to inability to access a shared memory device.
+
+Given that all I really want is round-robin load balancing and graceful restart, I think we'll just try nginx next.
