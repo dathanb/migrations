@@ -1,5 +1,7 @@
 #!/bin/bash
 
+printf "starting postgres: "
+
 docker run \
   --name fakestack_db \
   --rm \

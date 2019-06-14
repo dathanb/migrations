@@ -10,3 +10,4 @@ for f in pid/*; do
 done
 
 ./start-postgres.sh
+./start-envoy.sh
