@@ -138,3 +138,8 @@ Turns out I wasn't rebuilding the Docker image. :facepalm: But once I did, and p
 start getting a failure due to inability to access a shared memory device.
 
 Given that all I really want is round-robin load balancing and graceful restart, I think we'll just try nginx next.
+
+Now that I've put all this time into scripts for starting and stopping services, I think it would actually be totally
+possible to do this entirely with docker-compose.  I'd prefer to just use existing tooling rather than have to write all
+these scripts that are probably going to be brittle. Plus, I'm backgrounding all the services right now, which makes
+viewing the logs harder -- and I'd prefer to be able to watch the logs in realtime. So that's next on the agenda.

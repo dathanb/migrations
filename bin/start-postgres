@@ -1,16 +1,28 @@
 #!/bin/bash
 
+set -e
+
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$PROJECT_DIR"
 
 printf "starting postgres: "
 
 docker run \
-  --name fakestack_db \
+  --name fakestack-postgres \
   -d \
   --cidfile=pid/db.pid \
   -e POSTGRES_USER=postgres \
-  -e POSTGRES_PASSWORD=postgres \
+  -e POSTGRES_PASSWORD=password \
+	-e POSTGRES_DB=fakestack \
   --network fakestack-network \
+  -p 5432:5432 \
   postgres
 
+printf "waiting for postgres: "
+# wait for postgres to be ready
+docker run \
+	--rm \
+	--network fakestack-network \
+	fakestack-wait-for-postgres 1> /dev/null 2>&1
+
+printf "done\n"

@@ -8,7 +8,8 @@ cd "$PROJECT_DIR"
 printf "starting fakestack: "
 
 docker run \
-  --name fakestack \
+	-d \
+  --name fakestack-service-1 \
   --cidfile=pid/fakestack.pid \
   -e FAKESTACK_DB_USERNAME=postgres \
   -e FAKESTACK_DB_PASSWORD=password \
