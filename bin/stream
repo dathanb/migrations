@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$PROJECT_DIR"
+
+FAKESTACK_DIR="${PROJECT_DIR}/fakestack"
+DATA_DIR="${FAKESTACK_DIR}/data/small"
+
+cd "${DATA_DIR}"
+
+"${FAKESTACK_DIR}/fakestack" client
