@@ -19,5 +19,16 @@ services:
       FAKESTACK_DB_SSL_MODE: disable
       FAKESTACK_SERVER_PORT: 8080
     restart: unless-stopped
+    expose:
+      - 8080
+  fakestack-proxy:
+    image: nginx
+    depends_on: 
+      - fakestack
     ports: 
       - "8080:8080"
+    volumes:
+      - type: bind
+        source: ./tmp/nginx.conf
+        target: /etc/nginx/nginx.conf
+    restart: unless-stopped
