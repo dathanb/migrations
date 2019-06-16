@@ -143,3 +143,12 @@ Now that I've put all this time into scripts for starting and stopping services,
 possible to do this entirely with docker-compose.  I'd prefer to just use existing tooling rather than have to write all
 these scripts that are probably going to be brittle. Plus, I'm backgrounding all the services right now, which makes
 viewing the logs harder -- and I'd prefer to be able to watch the logs in realtime. So that's next on the agenda.
+
+@ 2019-06-15
+
+It was trivial to get the client streaming to fakestack in docker, so I'd say everything's working fine. I think the
+next thing I want to do, though, is to experiment with docker-compose instead of these ad-hoc scripts.
+
+And I'll need to do some work in the fakestack codebase to make the client a little more versatile.
+
+And I'll want to dockerize the client so it can be started and restarted as part of the stack.

@@ -4,7 +4,7 @@ A demo of things that can go wrong when doing online migrations in relational da
 structure migrations to avoid those pitfalls.
 
 TODO:
-1. Add fakestack service initialization to startup script
+1. Setup core fakestack infrastructure
 2. Add script to stream data to fakestack
 3. Setup prometheus container
 4. Setup grafana container talking to Prometheus
