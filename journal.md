@@ -152,3 +152,16 @@ next thing I want to do, though, is to experiment with docker-compose instead of
 And I'll need to do some work in the fakestack codebase to make the client a little more versatile.
 
 And I'll want to dockerize the client so it can be started and restarted as part of the stack.
+
+# 2019-06-16
+
+If I migrate to docker compose, it's not entirely clear how to get the fakestack service to wait for postgres to be
+ready.  We have a few options. e.g.,
+
+1. Include wait-for-it in the fakestack image
+2. Support in-container restart -- e.g., via s6-init
+3. Have some auto-restart policy in docker?
+
+Actually, it looks like docker compose supports restart policies: <https://docs.docker.com/compose/compose-file/#restart_policy> 
+
+

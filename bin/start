@@ -5,16 +5,9 @@ set -e
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$PROJECT_DIR"
 
-mkdir -p pid
+docker-compose up
 
-for f in pid/*; do
-  if [ -f "$f" ]; then
-    echo "Fakestack may already be running; please run stop.sh first"
-    exit 1
-  fi
-done
-
-bin/start-network
-bin/start-postgres
-bin/start-fakestack
-bin/start-nginx
+#bin/start-network
+#bin/start-postgres
+#bin/start-fakestack
+#bin/start-nginx
