@@ -10,7 +10,7 @@ TODO:
 3. Setup prometheus container
 4. Setup grafana container talking to Prometheus
 5. Setup fakestack with metrics and publish to prometheus
-6. Get a great deal of satisfaction out of watching the metrics stream in while streaming data to fakestack
+7. Get a great deal of satisfaction out of watching the metrics stream in while streaming data to fakestack
 7. Figure out how to initialize a grafana dashboard so that the container is setup correctly by default
 8. Setup envoy for service mesh routing
 9. Setup blue/green deployments

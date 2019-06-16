@@ -6,8 +6,3 @@ PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$PROJECT_DIR"
 
 docker-compose up
-
-#bin/start-network
-#bin/start-postgres
-#bin/start-fakestack
-#bin/start-nginx
