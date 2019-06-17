@@ -12,28 +12,34 @@ import (
 )
 
 type CreateUserRequest struct {
-	Id int `json:"id"`
+	Id          int    `json:"id"`
 	DisplayName string `json:"display_name"`
 }
 
 var (
-	putUserRequests = promauto.NewCounter(prometheus.CounterOpts{
-		Name: "fakestack_putUsers_requests_total",
+	putUserRequestCount = promauto.NewCounter(prometheus.CounterOpts{
+		Name: "fakestack_putUser_request_total",
 		Help: "The total number of Users sent to the service",
 	})
-
+	putUserRequestTiming = promauto.NewHistogram(prometheus.HistogramOpts{
+		Name: "fakestack_putUser_request_timing",
+		Help: "the amount of time a request to create a new User takes",
+	})
 )
 
 func RegisterUserEndpoint(request *http.Request, vars map[string]string) ([]byte, int, error) {
 	var reqObject CreateUserRequest
 	logrus.Debug("Handling create user request to %v", request.URL)
 
-	putUserRequests.Inc()
+	putUserRequestCount.Inc()
+	timer := prometheus.NewTimer(putUserRequestTiming)
+	defer timer.ObserveDuration()
 
 	body, err := ioutil.ReadAll(request.Body)
 	if err != nil {
 		return nil, 0, merry.WithHTTPCode(err, 500)
 	}
+
 	err = json.Unmarshal(body, &reqObject)
 	if err != nil {
 		return nil, 0, merry.WithHTTPCode(err, 400)

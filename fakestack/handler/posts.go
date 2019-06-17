@@ -19,17 +19,24 @@ type CreatePostRequest struct {
 }
 
 var (
-	putPostRequests = promauto.NewCounter(prometheus.CounterOpts{
-		Name: "fakestack_putPosts_requests_total",
+	putPostRequestCount = promauto.NewCounter(prometheus.CounterOpts{
+		Name: "fakestack_putPost_request_count",
 		Help: "The total number of Posts sent to the service",
 	})
+	putPostRequestTiming = promauto.NewHistogram(prometheus.HistogramOpts{
+		Name: "fakestack_putPost_request_timing",
+		Help: "The duration of calls to create a new Post",
+	})
 )
+
 
 func CreatePostEndpoint(request *http.Request, vars map[string]string) ([]byte, int, error) {
 	var reqObject CreatePostRequest
 	logrus.Debug("Handling create post request to %v", request.URL)
 
-	putPostRequests.Inc()
+	putPostRequestCount.Inc()
+	timer := prometheus.NewTimer(putPostRequestTiming)
+	defer timer.ObserveDuration()
 
 	body, err := ioutil.ReadAll(request.Body)
 	if err != nil {
