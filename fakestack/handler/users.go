@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"github.com/ansel1/merry"
 	"github.com/dathanb/migrations/fakestack/db"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
@@ -14,9 +16,19 @@ type CreateUserRequest struct {
 	DisplayName string `json:"display_name"`
 }
 
+var (
+	putUserRequests = promauto.NewCounter(prometheus.CounterOpts{
+		Name: "fakestack_putUsers_requests_total",
+		Help: "The total number of Users sent to the service",
+	})
+
+)
+
 func RegisterUserEndpoint(request *http.Request, vars map[string]string) ([]byte, int, error) {
 	var reqObject CreateUserRequest
 	logrus.Debug("Handling create user request to %v", request.URL)
+
+	putUserRequests.Inc()
 
 	body, err := ioutil.ReadAll(request.Body)
 	if err != nil {

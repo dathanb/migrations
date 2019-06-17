@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"github.com/ansel1/merry"
 	"github.com/dathanb/migrations/fakestack/db"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
@@ -16,9 +18,18 @@ type CreatePostRequest struct {
 	Body     string `json:"body"`
 }
 
+var (
+	putPostRequests = promauto.NewCounter(prometheus.CounterOpts{
+		Name: "fakestack_putPosts_requests_total",
+		Help: "The total number of Posts sent to the service",
+	})
+)
+
 func CreatePostEndpoint(request *http.Request, vars map[string]string) ([]byte, int, error) {
 	var reqObject CreatePostRequest
 	logrus.Debug("Handling create post request to %v", request.URL)
+
+	putPostRequests.Inc()
 
 	body, err := ioutil.ReadAll(request.Body)
 	if err != nil {

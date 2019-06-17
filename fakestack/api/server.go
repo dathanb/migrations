@@ -1,22 +1,23 @@
 package api
 
 import (
-	"github.com/gorilla/mux"
-	"net/http"
 	"fmt"
-	"github.com/jamesbibby/swag/swagger"
+	"github.com/gorilla/mux"
 	"github.com/jamesbibby/swag"
+	"github.com/jamesbibby/swag/swagger"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	log "github.com/sirupsen/logrus"
+	"net/http"
 	"net/http/httptest"
 	"net/url"
 )
-
 
 func Serve(port int) {
 	router := mux.NewRouter()
 
 	apiHandler := generateApiHandler(router)
 	router.Path("/api/v1/swagger").Methods("GET").Handler(apiHandler)
+	router.Path("/metrics").Methods("GET").Handler(promhttp.Handler())
 
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), router))
 }
@@ -40,15 +41,15 @@ func SwaggerApi() *swagger.API {
 func SwaggerDefinition(api *swagger.API) (string, error) {
 	handler := api.Handler(true)
 	swaggerUrl := url.URL{
-		Host:"localhost",
-		Path:"/",
-		Scheme:"http",
+		Host:   "localhost",
+		Path:   "/",
+		Scheme: "http",
 	}
 
 	request := http.Request{
-		Method:"GET",
-		URL: &swaggerUrl,
-		Host:"localhost",
+		Method: "GET",
+		URL:    &swaggerUrl,
+		Host:   "localhost",
 	}
 	responseWriter := httptest.NewRecorder()
 	handler(responseWriter, &request)

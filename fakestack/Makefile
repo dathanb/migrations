@@ -17,5 +17,6 @@ test: build
 	go test -v ./...
 
 docker:
+	go mod download
 	docker build -t fakestack .
 	docker tag fakestack:latest fakestack:$(VERSION)
