@@ -23,6 +23,10 @@ var (
 		Name: "fakestack_putPost_request_count",
 		Help: "The total number of Posts sent to the service",
 	})
+	putPostRequestErrorCount = promauto.NewCounter(prometheus.CounterOpts{
+		Name: "fakestack_putPost_request_error_count",
+		Help: "The number of errors encountered during requests to create Posts",
+	})
 	putPostRequestTiming = promauto.NewHistogram(prometheus.HistogramOpts{
 		Name: "fakestack_putPost_request_timing",
 		Help: "The duration of calls to create a new Post",
@@ -40,22 +44,26 @@ func CreatePostEndpoint(request *http.Request, vars map[string]string) ([]byte, 
 
 	body, err := ioutil.ReadAll(request.Body)
 	if err != nil {
+		putPostRequestErrorCount.Inc()
 		return nil, 0, merry.Wrap(err)
 	}
 
 	err = json.Unmarshal(body, &reqObject)
 	if err != nil {
+		putPostRequestErrorCount.Inc()
 		return nil, 0, merry.Wrap(err)
 	}
 
 	post, err := db.ApplicationDAL().Posts().UpsertPost(request.Context(), reqObject.Id, reqObject.PostType,
 		reqObject.UserId, reqObject.Body)
 	if err != nil {
+		putPostRequestErrorCount.Inc()
 		return nil, 0, merry.Wrap(err)
 	}
 
 	data, err := json.Marshal(post)
 	if err != nil {
+		putPostRequestErrorCount.Inc()
 		return nil, 0, merry.Wrap(err)
 	}
 

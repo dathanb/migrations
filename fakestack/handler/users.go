@@ -18,8 +18,12 @@ type CreateUserRequest struct {
 
 var (
 	putUserRequestCount = promauto.NewCounter(prometheus.CounterOpts{
-		Name: "fakestack_putUser_request_total",
-		Help: "The total number of Users sent to the service",
+		Name: "fakestack_putUser_request_count",
+		Help: "The number of Users sent to the service",
+	})
+	putUserRequestErrorCount = promauto.NewCounter(prometheus.CounterOpts{
+		Name: "fakestack_putUser_request_error_count",
+	    Help: "The number of errors encountered during requests to create Users",
 	})
 	putUserRequestTiming = promauto.NewHistogram(prometheus.HistogramOpts{
 		Name: "fakestack_putUser_request_timing",
@@ -37,21 +41,25 @@ func RegisterUserEndpoint(request *http.Request, vars map[string]string) ([]byte
 
 	body, err := ioutil.ReadAll(request.Body)
 	if err != nil {
+		putUserRequestErrorCount.Inc()
 		return nil, 0, merry.WithHTTPCode(err, 500)
 	}
 
 	err = json.Unmarshal(body, &reqObject)
 	if err != nil {
+		putUserRequestErrorCount.Inc()
 		return nil, 0, merry.WithHTTPCode(err, 400)
 	}
 
 	user, err := db.ApplicationDAL().Users().UpsertUser(request.Context(), reqObject.Id, reqObject.DisplayName)
 	if err != nil {
+		putUserRequestErrorCount.Inc()
 		return nil, 0, merry.WithHTTPCode(err, 500)
 	}
 
 	data, err := json.Marshal(user)
 	if err != nil {
+		putUserRequestErrorCount.Inc()
 		return nil, 0, merry.WithHTTPCode(err, 500)
 	}
 
