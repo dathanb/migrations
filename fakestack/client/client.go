@@ -31,9 +31,11 @@ func Run(dirName string) {
 
 	users := make(chan models.User)
 	go readUsers(usersFile, users)
+	defer usersFile.Close()
 
 	posts := make(chan models.Post)
 	//go readPosts(postsFile, posts)
+	//defer posts.Close()
 
 	// TODO: put this loop in a func and spawn several parallel goroutines to run them
 	for reqDescriptor := range sortInputs(users, posts) {

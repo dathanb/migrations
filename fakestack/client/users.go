@@ -5,18 +5,18 @@ import (
 	"fmt"
 	"github.com/ansel1/merry"
 	"github.com/dathanb/migrations/fakestack/models"
-	"os"
+	"io"
 	"strconv"
 	"time"
 )
 
-func readUsers(file *os.File, users chan <- models.User) {
-	err := consumeBom(file)
+func readUsers(reader io.ReadSeeker, users chan <- models.User) {
+	err := consumeBom(reader)
 	if err != nil {
 		panic(merry.WithUserMessage(err, "Error while consuming BOM from the XML file"))
 	}
 
-	decoder := xml.NewDecoder(file)
+	decoder := xml.NewDecoder(reader)
 
 	err = consumeLeader(decoder)
 	if err != nil {
@@ -24,69 +24,47 @@ func readUsers(file *os.File, users chan <- models.User) {
 	}
 
 	// consume the <users> tag
-	token, err := decoder.Token()
+	token, err := getToken(decoder);
 	if err != nil {
 		panic(merry.WithMessagef(err, "Failed to read a token"))
 	}
 	_ = token.(xml.StartElement)
 
-	// consume the newline
-	token, err = decoder.Token()
-	if err != nil {
-		panic(merry.WithMessagef(err, "Failed to read a token"))
-	}
-	_ = token.(xml.CharData) // newline
+	for {
+		user, err := readUser(decoder)
+		if err != nil {
+			panic(merry.WithMessage(err, "Failed to deserialize user from xml"))
+		}
 
-	//for {
-	//	user, err := readUser(decoder)
-	//
-	//	token, err = decoder.Token()
-	//	if err != nil {
-	//		panic(merry.WithUserMessage(err, "Failed to read a token from input"))
-	//	}
-	//
-	//	switch tok := token.(type) {
-	//	case xml.StartElement:
-	//		// this is a <row> tag, which represents a user
-	//		// so read the user and stick it in the channel
-	//		user, err := readUser(decoder)
-	//		if err != nil {
-	//			panic(merry.WithUserMessage(err, "Failed to decode user from input"))
-	//		}
-	//		users <- user
-	//		continue
-	//	case xml.EndElement:
-	//		// this is </users>, which means end of file
-	//		// so just exit the loop
-	//		break
-	//	default:
-	//		panic(merry.New(fmt.Sprintf("Unrecognized token type: %+v\n", tok)))
-	//	}
-	//
-	//	break
-	//}
-	//fmt.Printf("%+v\n", token)
+		users <- user
+
+		if blankUser(user) {
+			break
+		}
+	}
+	fmt.Printf("%+v\n", token)
 
 	close(users)
 }
 
 func readUser(decoder *xml.Decoder) (models.User, error){
-	user := models.User{}
+	user := models.NewUser()
 
 	// read the token; might be CharData or StartToken
-	token, err := decoder.Token()
+	token, err := getToken(decoder)
 	if err != nil {
 		return user, err
 	}
-	_, ok := token.(xml.CharData)
+
+	_, ok := token.(xml.EndElement)
 	if ok {
-		// if we consumed CharData, read the next token, which should be the start of the <row/> element
-		token, err = decoder.Token()
+		// this is actually an EndElement, so signals the end of the stream of users
+		return models.NewUser(), nil
 	}
 
 	rowToken := token.(xml.StartElement)
 	if rowToken.Name.Local != "row" {
-		return models.User{}, merry.New(fmt.Sprintf("Expected start of row, but got start of %s", rowToken.Name))
+		return models.NewUser(), merry.New(fmt.Sprintf("Expected start of row, but got start of %s", rowToken.Name))
 	}
 
 	var attr xml.Attr
@@ -95,23 +73,23 @@ func readUser(decoder *xml.Decoder) (models.User, error){
 		if attr.Name.Local == "Id" {
 			user.Id, err = strconv.Atoi(attr.Value)
 			if err != nil {
-				return models.User{}, merry.WithMessage(err, fmt.Sprintf("Couldn't convert value to integer: %s", attr.Value))
+				return models.NewUser(), merry.WithMessage(err, fmt.Sprintf("Couldn't convert value to integer: %s", attr.Value))
 			}
 		} else if attr.Name.Local == "DisplayName" {
 			user.DisplayName = attr.Value
 		} else if attr.Name.Local == "CreationDate" {
 			creationDate, err := time.Parse(models.TimeFormat, attr.Value)
 			if err != nil {
-				return models.User{}, merry.WithMessage(err, fmt.Sprintf("Couldn't parse value as time: %s", attr.Value))
+				return models.NewUser(), merry.WithMessage(err, fmt.Sprintf("Couldn't parse value as time: %s", attr.Value))
 			}
 			user.CreationDate = models.Time(creationDate)
 		}
 	}
 
 	// consume the EndElement
-	token, err = decoder.Token()
+	token, err = getToken(decoder)
 	if err != nil {
-		return models.User{}, merry.WithMessage(err, fmt.Sprintf("Expected end of row element, but got %+v", token))
+		return models.NewUser(), merry.WithMessage(err, fmt.Sprintf("Expected end of row element, but got %+v", token))
 	}
 
 	return user, nil
@@ -132,19 +110,24 @@ func consumeLeader(decoder *xml.Decoder) error {
 	}
 	_ = token.(xml.CharData) // newline
 
-	// consume the <users> tag
-	token, err = decoder.Token()
-	if err != nil {
-		return merry.WithMessagef(err, "Failed to read a token")
-	}
-	_ = token.(xml.StartElement)
-
-	// consume the newline
-	token, err = decoder.Token()
-	if err != nil {
-		return merry.WithMessagef(err, "Failed to read a token")
-	}
-	_ = token.(xml.CharData) // newline
-
 	return nil
+}
+
+func getToken(decoder *xml.Decoder) (xml.Token, error) {
+	// consume the newline
+	token, err := decoder.Token()
+	if err != nil {
+		return nil, merry.WithMessagef(err, "Failed to read a token")
+	}
+	_, ok := token.(xml.CharData) // newline
+
+	if ok {
+		// if we read CharData, skip it and read another token instead
+		return decoder.Token()
+	}
+	return token, err
+}
+
+func blankUser(user models.User) bool {
+	return models.UserEquals(user, models.NewUser())
 }
