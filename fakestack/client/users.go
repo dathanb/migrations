@@ -65,7 +65,7 @@ func readUsers(file *os.File, users chan <- models.User) {
 	//
 	//	break
 	//}
-	fmt.Printf("%+v\n", token)
+	//fmt.Printf("%+v\n", token)
 
 	close(users)
 }
@@ -73,11 +73,17 @@ func readUsers(file *os.File, users chan <- models.User) {
 func readUser(decoder *xml.Decoder) (models.User, error){
 	user := models.User{}
 
-	// read the start user token
+	// read the token; might be CharData or StartToken
 	token, err := decoder.Token()
 	if err != nil {
 		return user, err
 	}
+	_, ok := token.(xml.CharData)
+	if ok {
+		// if we consumed CharData, read the next token, which should be the start of the <row/> element
+		token, err = decoder.Token()
+	}
+
 	rowToken := token.(xml.StartElement)
 	if rowToken.Name.Local != "row" {
 		return models.User{}, merry.New(fmt.Sprintf("Expected start of row, but got start of %s", rowToken.Name))
