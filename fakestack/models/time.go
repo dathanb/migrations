@@ -20,4 +20,3 @@ func (t *Time) UnmarshalJSON(buf []byte) error {
 	*t = Time(tt)
 	return nil
 }
-
