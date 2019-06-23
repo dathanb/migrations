@@ -24,7 +24,7 @@ func readUsers(reader io.ReadSeeker, users chan <- models.User) {
 	}
 
 	// consume the <users> tag
-	token, err := getToken(decoder);
+	token, err := getToken(decoder)
 	if err != nil {
 		panic(merry.WithMessagef(err, "Failed to read a token"))
 	}
@@ -38,7 +38,7 @@ func readUsers(reader io.ReadSeeker, users chan <- models.User) {
 
 		users <- user
 
-		if blankUser(user) {
+		if models.UserIsBlank(user) {
 			break
 		}
 	}
@@ -47,7 +47,7 @@ func readUsers(reader io.ReadSeeker, users chan <- models.User) {
 	close(users)
 }
 
-func readUser(decoder *xml.Decoder) (models.User, error){
+func readUser(decoder *xml.Decoder) (models.User, error) {
 	user := models.NewUser()
 
 	// read the token; might be CharData or StartToken
@@ -128,6 +128,3 @@ func getToken(decoder *xml.Decoder) (xml.Token, error) {
 	return token, err
 }
 
-func blankUser(user models.User) bool {
-	return models.UserEquals(user, models.NewUser())
-}

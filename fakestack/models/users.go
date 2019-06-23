@@ -29,3 +29,6 @@ func UserEquals(first User, second User) bool {
 	return first.Id == second.Id && first.CreationDate == second.CreationDate && first.DisplayName == second.DisplayName
 }
 
+func UserIsBlank(user User) bool {
+	return UserEquals(user, NewUser())
+}
