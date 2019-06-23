@@ -1,6 +1,7 @@
 package client
 
 import (
+	"encoding/xml"
 	"github.com/ansel1/merry"
 	"io"
 )
@@ -22,5 +23,23 @@ func consumeBom(reader io.ReadSeeker) error {
 	}
 
 	return err
+}
+
+func consumeLeader(decoder *xml.Decoder) error {
+	// consume the xml processing instruction
+	token, err := decoder.Token()
+	if err != nil {
+		return merry.WithMessagef(err, "Failed to read a token")
+	}
+	_ = token.(xml.ProcInst)
+
+	// consume the newline
+	token, err = decoder.Token()
+	if err != nil {
+		return merry.WithMessagef(err, "Failed to read a token")
+	}
+	_ = token.(xml.CharData) // newline
+
+	return nil
 }
 

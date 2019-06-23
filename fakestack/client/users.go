@@ -42,7 +42,6 @@ func readUsers(reader io.ReadSeeker, users chan <- models.User) {
 			break
 		}
 	}
-	fmt.Printf("%+v\n", token)
 
 	close(users)
 }
@@ -93,24 +92,6 @@ func readUser(decoder *xml.Decoder) (models.User, error) {
 	}
 
 	return user, nil
-}
-
-func consumeLeader(decoder *xml.Decoder) error {
-	// consume the xml processing instruction
-	token, err := decoder.Token()
-	if err != nil {
-		return merry.WithMessagef(err, "Failed to read a token")
-	}
-	_ = token.(xml.ProcInst)
-
-	// consume the newline
-	token, err = decoder.Token()
-	if err != nil {
-		return merry.WithMessagef(err, "Failed to read a token")
-	}
-	_ = token.(xml.CharData) // newline
-
-	return nil
 }
 
 func getToken(decoder *xml.Decoder) (xml.Token, error) {

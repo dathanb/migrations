@@ -24,18 +24,18 @@ func Run(dirName string) {
 	if err != nil {
 		panic(merry.WithUserMessage(err, "Failed to open input file for users"))
 	}
-	//postsFile, err := os.Open(path.Join(dirName, "Posts.xml"))
-	//if err != nil {
-	//	panic(merry.WithUserMessage(err, "Failed to open input file for posts"))
-	//}
+	postsFile, err := os.Open(path.Join(dirName, "Posts.xml"))
+	if err != nil {
+		panic(merry.WithUserMessage(err, "Failed to open input file for posts"))
+	}
 
 	users := make(chan models.User)
 	go readUsers(usersFile, users)
 	defer usersFile.Close()
 
 	posts := make(chan models.Post)
-	//go readPosts(postsFile, posts)
-	//defer posts.Close()
+	go readPosts(postsFile, posts)
+	defer postsFile.Close()
 
 	// TODO: put this loop in a func and spawn several parallel goroutines to run them
 	for reqDescriptor := range sortInputs(users, posts) {
