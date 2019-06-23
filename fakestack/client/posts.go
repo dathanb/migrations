@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/ansel1/merry"
 	"github.com/dathanb/migrations/fakestack/models"
+	"github.com/sirupsen/logrus"
 	"io"
 	"strconv"
 	"time"
@@ -35,6 +36,8 @@ func readPosts(reader io.ReadSeeker, posts chan <- models.Post) {
 		if err != nil {
 			panic(merry.WithMessage(err, "Failed to deserialize user from xml"))
 		}
+
+		logrus.Debugf("Loaded post %+v", post)
 
 		posts <- post
 

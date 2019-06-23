@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/ansel1/merry"
 	"github.com/dathanb/migrations/fakestack/models"
+	"github.com/sirupsen/logrus"
 	"io"
 	"strconv"
 	"time"
@@ -35,6 +36,8 @@ func readUsers(reader io.ReadSeeker, users chan <- models.User) {
 		if err != nil {
 			panic(merry.WithMessage(err, "Failed to deserialize user from xml"))
 		}
+
+		logrus.Debugf("Loaded user %+v", user)
 
 		users <- user
 

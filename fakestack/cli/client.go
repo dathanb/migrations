@@ -4,6 +4,7 @@ import (
 	"github.com/ansel1/merry"
 	"github.com/dathanb/migrations/fakestack/client"
 	"github.com/dathanb/migrations/fakestack/config"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
 
@@ -29,6 +30,8 @@ var clientCmd = &cobra.Command{
 		if err != nil {
 			panic(merry.WithUserMessage(err, "Failed to load config"))
 		}
+
+		logrus.Debugf("Loading data from %s", dirName);
 
 		client.Run(dirName)
 	},
