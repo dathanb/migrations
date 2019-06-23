@@ -6,3 +6,20 @@ type User struct {
 	CreationDate Time   `json:"creation_date,string"`
 }
 
+func NewUser() User {
+	return User{
+		Id: 0,
+		DisplayName: "",
+		CreationDate: ZeroDate(),
+	}
+}
+
+func UserEquals(first User, second User) bool {
+	return first.Id == second.Id &&
+		first.CreationDate == second.CreationDate &&
+		first.DisplayName == second.DisplayName
+}
+
+func UserIsBlank(user User) bool {
+	return UserEquals(user, NewUser())
+}
