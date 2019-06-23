@@ -94,18 +94,3 @@ func readUser(decoder *xml.Decoder) (models.User, error) {
 	return user, nil
 }
 
-func getToken(decoder *xml.Decoder) (xml.Token, error) {
-	// consume the newline
-	token, err := decoder.Token()
-	if err != nil {
-		return nil, merry.WithMessagef(err, "Failed to read a token")
-	}
-	_, ok := token.(xml.CharData) // newline
-
-	if ok {
-		// if we read CharData, skip it and read another token instead
-		return decoder.Token()
-	}
-	return token, err
-}
-
