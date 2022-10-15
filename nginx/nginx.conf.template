@@ -1,15 +1,16 @@
+# The default config just connects to a single initial fakestack instance
 events {
 }
 
-error_log /dev/stdout info;
+error_log /dev/stderr info;
 
 http {
-    access_log /dev/stdout info;
+    access_log /dev/stderr;
 
     upstream fakestack {
-        server srv1.example.com;
-        server srv2.example.com;
-        server srv3.example.com;
+#        server migrations_fakestack_1:8080;
+#SERVERS_1
+#SERVERS_2
     }
 
     server {
@@ -20,3 +21,4 @@ http {
         }
     }
 }
+

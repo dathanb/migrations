@@ -5,4 +5,9 @@ cd "$PROJECT_DIR"
 
 set +e
 
-docker-compose down
+files="-f docker-compose.yml"
+for f in tmp/*-compose.yml; do
+  files="$files -f $f"
+done
+
+docker-compose $files down

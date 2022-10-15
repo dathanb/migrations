@@ -1,0 +1,71 @@
+#!/bin/bash
+
+version=$1
+if [ -z "$version" ]; then
+  printf "Please provide the tag of the docker image to launch\n"
+  exit 1
+fi
+shift
+
+descriptorFile=tmp/stack.info
+
+<<DOCUMENTATION
+Lets start with the case where were starting a new service, and there arent any services already running.
+(Bootstrapping from an initial state seems like a good place to start, since it makes testing super easy)
+
+Well, let's make sure the state is initialized correctly in bin/start.
+
+Then we'll detect that there's neither a blue nor a green file in tmp/, and so we'll default to blue.
+
+# generate the docker-compose file
+# start the new services
+# update the nginx.conf file
+# bounce nginx
+# remove the old services from the nginx.conf file
+# bounce nginx
+# stop the old services
+# remove the old docker-compose file
+
+# This approach 
+DOCUMENTATION
+
+# detect the name of the current stack
+if [ -f "tmp/stack.info" ]; then
+  currentStack="$(cat tmp/stack.info)"
+  printf "Detected current stack: ${currentStack}\n"
+fi
+
+# determine the new stack name
+if [ ! -z "${currentStack}" ]; then
+  let "newStack = $currentStack + 1"
+else
+  newStack=1
+fi
+printf "New stack name: ${newStack}\n"
+
+# write the new compose file
+newComposeFilename=tmp/fakestack-$newStack-compose.yml
+newServiceName=fakestack-$newStack
+cat <<EOF > $newComposeFilename
+version: "3.7"
+services:
+  $newServiceName:
+    image: fakestack
+    depends_on:
+      - postgres
+    environment:
+      FAKESTACK_DB_USERNAME: postgres
+      FAKESTACK_DB_PASSWORD: password
+      FAKESTACK_DB_PORT: 5432
+      FAKESTACK_DB_HOST: postgres
+      FAKESTACK_DB_DBNAME: fakestack
+      FAKESTACK_DB_SSL_MODE: disable
+      FAKESTACK_SERVER_PORT: 8080
+    restart: unless-stopped
+    expose:
+      - 8080
+EOF
+
+# start the new stack
+printf "Starting the new fakestack\n"
+docker-compose -f docker-compose.yml -f $newComposeFilename up --no-recreate $newServiceName
